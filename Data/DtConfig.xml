@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<config>
+  <allow_mod></allow_mod>
+  <auto_ban></auto_ban>
+  <auto_kick></auto_kick>
+  <auto_warn></auto_warn>
+  <check_spam></check_spam>
+  <get_update></get_update>
+  <auto_restart></auto_restart>
+</config>

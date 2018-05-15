@@ -8,19 +8,21 @@ namespace RyuBot.Modules
 {
     public class MdWarn : ModuleBase<SocketCommandContext>
     {
-        private string time = DateTime.Now.ToString();
-
         [Command("Warn")]
         [RequireUserPermission(GuildPermission.ManageMessages)]
-        public async Task WarnUser(SocketGuildUser user, [Remainder] string reason)
+        public async Task WarnUser(SocketGuildUser WarnedUser, [Remainder] string WarningReason)
         {
-            var messages = await this.Context.Channel.GetMessagesAsync(1).Flatten();
-            await this.Context.Channel.DeleteMessagesAsync(messages);
-            await Context.Channel.SendMessageAsync(user.Mention + " | **Please read the rules on the channel <#411271165429022730> \r\nYou have been formally warned!** \r\nYou were warned for: " + reason);
+            var ReturnMsg = await Context.Channel.GetMessagesAsync(1).Flatten();
 
-            Console.BackgroundColor = ConsoleColor.DarkYellow;
-            Console.WriteLine(time + ":: Command Request: !warn; " + "ID <" + Context.User.Id.ToString() + "> " +
-                "\r\nUsername: <" + Context.User.Username.ToString() + ">" + " Mentioned user: " + "<" + user.Mention + ">" + " Channel ID: <" + Context.Channel.Id + ">" + " Warning reason: <" + reason  + ">");
+            await Context.Channel.DeleteMessagesAsync(ReturnMsg);
+            await Context.Channel.SendMessageAsync(WarnedUser.Mention + " | **Please read the rules on the channel <#411271165429022730>" + Environment.NewLine + "" +
+                                                   "You have been formally warned!**" + Environment.NewLine + 
+                                                   "You were warned for: " + WarningReason);
+
+            string Message = "Command **!warn** requested by <@" + Context.Message.Author.Id + "> to <" + WarnedUser.Mention + ">" + Environment.NewLine +
+                             "in channel <#" + Context.Channel.Id + "> with warning reason: *" + WarningReason + "*";
+
+            await Helper.LoggingAsync(new LogMessage(LogSeverity.Verbose, "Module", Message));
         }
     }
 }

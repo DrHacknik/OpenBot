@@ -19,9 +19,6 @@ namespace RyuBot.Modules
 
             await Context.Channel.SendMessageAsync("Rebooting the bot... Hum... Wait... This can take up to a minute.");
 
-            Console.WriteLine(time + ":: Command Request: !reboot; " + "ID <" + Context.User.Id.ToString() + "> " +
-                "\r\nUsername: <" + Context.User.Username.ToString() + ">" + " Channel ID: <" + Context.Channel.Id + ">");
-
             string Message = "Command **!reboot** requested by <@" + Context.Message.Author.Id + ">" + Environment.NewLine +
                              "in channel <#" + Context.Channel.Id + ">";
 

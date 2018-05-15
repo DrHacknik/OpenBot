@@ -14,19 +14,20 @@ namespace RyuBot.Modules
         [RequireUserPermission(GuildPermission.ManageMessages)]
         public async Task Reboot()
         {
-            var messages = await this.Context.Channel.GetMessagesAsync(1).Flatten();
-            await this.Context.Channel.DeleteMessagesAsync(messages);
-            //var embed = new EmbedBuilder();
-            //embed.WithTitle("Inputed message");
-            //embed.WithDescription(message);
-            //embed.WithColor(new Color(0, 255, 0));
+            var ReturnMsg = await Context.Channel.GetMessagesAsync(1).Flatten();
+            await Context.Channel.DeleteMessagesAsync(ReturnMsg);
 
-            await Context.Channel.SendMessageAsync("Rebooting the bot. \r\nThis can take up to a minute.");
-            Console.BackgroundColor = ConsoleColor.DarkYellow;
+            await Context.Channel.SendMessageAsync("Rebooting the bot... Hum... Wait... This can take up to a minute.");
+
             Console.WriteLine(time + ":: Command Request: !reboot; " + "ID <" + Context.User.Id.ToString() + "> " +
                 "\r\nUsername: <" + Context.User.Username.ToString() + ">" + " Channel ID: <" + Context.Channel.Id + ">");
 
-            
+            string Message = "Command **!reboot** requested by <@" + Context.Message.Author.Id + ">" + Environment.NewLine +
+                             "in channel <#" + Context.Channel.Id + ">";
+
+            await Helper.LoggingAsync(new LogMessage(LogSeverity.Verbose, "Module", Message));
+
+            Environment.Exit(0);
         }
     }
 }

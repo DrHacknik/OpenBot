@@ -13,7 +13,7 @@ namespace RyuBot
        string time = DateTime.Now.ToString();
        string cd = System.IO.Directory.GetCurrentDirectory();
        [Command("Status")]
-       public async Task StatusMessage(Program _client, [Remainder] string curstat)
+       public async Task StatusMessage(Program _client)
        {
             var ReturnMsg = await Context.Channel.GetMessagesAsync(1).Flatten();
             await Context.Channel.DeleteMessagesAsync(ReturnMsg);

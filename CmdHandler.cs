@@ -15,7 +15,7 @@ namespace RyuBot
         {
             DiscordClient = client;
             CmdService    = new CommandService(new CommandServiceConfig
-            {                                       // Add the command service to the collection
+            {
                 LogLevel = LogSeverity.Verbose,     // Tell the logger to give Verbose amount of info
                 DefaultRunMode = RunMode.Async,     // Force all commands to run async by default
                 CaseSensitiveCommands = false       // Ignore case when executing commands

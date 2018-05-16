@@ -15,7 +15,7 @@ namespace RyuBot.Modules
 
         [Command("Delete")]
         [RequireUserPermission(GuildPermission.ManageMessages)]
-        public async Task DeleteMessages(int Number, [Remainder]ulong ChannelId = 0, [Remainder]string Reason = "Unknown")
+        public async Task DeleteMessages(int Number, ulong ChannelId = 0, [Remainder]string Reason = "Unknown")
         {
             if (ChannelId == 0)
             {

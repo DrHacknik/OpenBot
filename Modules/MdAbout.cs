@@ -20,8 +20,6 @@ namespace RyuBot
         {
             var ReturnMsg = await Context.Channel.GetMessagesAsync(1).Flatten();
             await Context.Channel.DeleteMessagesAsync(ReturnMsg);
-            var messages = await this.Context.Channel.GetMessagesAsync(1).Flatten();
-            await this.Context.Channel.DeleteMessagesAsync(messages);
              string Message = "=====================================" + Environment.NewLine +
                                  "RyuBot for Discord" + Environment.NewLine +
                                  "by Dr.Hacknik & Ac_K" + Environment.NewLine +

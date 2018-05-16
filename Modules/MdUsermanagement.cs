@@ -12,40 +12,42 @@ namespace RyuBot.Modules
         [Command("Kick")]
         [RequireBotPermission(GuildPermission.KickMembers)]
         [RequireUserPermission(GuildPermission.KickMembers)]
-        public async Task KickUser(IGuildUser user, string reason = "No reason providied.")
+        public async Task KickUser(IGuildUser user, [Remainder]string reason)
         {
-            var messages = await this.Context.Channel.GetMessagesAsync(1).Flatten();
-            await this.Context.Channel.DeleteMessagesAsync(messages);
+            var ReturnMsg = await Context.Channel.GetMessagesAsync(1).Flatten();
+            await Context.Channel.DeleteMessagesAsync(ReturnMsg);
             await user.KickAsync(reason);
-            Console.BackgroundColor = ConsoleColor.DarkYellow;
-            Console.WriteLine(time + ":: Command Request: !kick; " + "ID <" + Context.User.Id.ToString() + "> " +
-                "\r\nUsername: <" + Context.User.Username.ToString() + ">" + " Channel ID: <" + Context.Channel.Id + ">" + " Mentioned user: <" + user + ">");
+            string Message = "Command **!kick** requested by <@" + Context.Message.Author.Id  + Environment.NewLine +
+                "in channel <#" + Context.Channel.Id + ">" + "Mentioned User: <" + user.Mention + ">" + " Kick reason: <" + reason + ">";
+
+            await Helper.LoggingAsync(new LogMessage(LogSeverity.Verbose, "Module", Message));
         }
 
         [Command("Ban")]
         [RequireBotPermission(GuildPermission.BanMembers)]
         [RequireUserPermission(GuildPermission.BanMembers)]
-        public async Task BanUser(IGuildUser user, string reason = "No reason providied.")
+        public async Task BanUser(IGuildUser user, [Remainder]string reason)
         {
-            var messages = await this.Context.Channel.GetMessagesAsync(1).Flatten();
-            await this.Context.Channel.DeleteMessagesAsync(messages);
+            var ReturnMsg = await Context.Channel.GetMessagesAsync(1).Flatten();
+            await Context.Channel.DeleteMessagesAsync(ReturnMsg);
             await user.Guild.AddBanAsync(user, 1, reason);
-            Console.BackgroundColor = ConsoleColor.DarkYellow;
-            Console.WriteLine(time + ":: Command Request: !ban; " + "ID <" + Context.User.Id.ToString() + "> " +
-                "\r\nUsername: <" + Context.User.Username.ToString() + ">" + " Channel ID: <" + Context.Channel.Id + ">" + " Mentioned user: <" + user + ">");
+            string Message = "Command **!ban** requested by <@" + Context.Message.Author.Id  + Environment.NewLine +
+                "in channel <#" + Context.Channel.Id + ">" + "Mentioned User: <" + user.Mention + ">" + " Ban reason: <" + reason + ">";
+
         }
 
         [Command("Mute")]
         [RequireUserPermission(GuildPermission.ManageMessages)]
         [RequireBotPermission(GuildPermission.MuteMembers)]
-        public async Task MuteUser(IGuildUser user, string reason = "No reason providied.")
+        public async Task MuteUser(IGuildUser user, [Remainder]string reason)
         {
-            var messages = await this.Context.Channel.GetMessagesAsync(1).Flatten();
-            await this.Context.Channel.DeleteMessagesAsync(messages);
+            var ReturnMsg = await Context.Channel.GetMessagesAsync(1).Flatten();
+            await Context.Channel.DeleteMessagesAsync(ReturnMsg);
             await Context.Channel.SendMessageAsync("This Command isn't ready yet.");
             Console.BackgroundColor = ConsoleColor.DarkYellow;
-            Console.WriteLine(time + ":: Command Request: !mute; " + "ID <" + Context.User.Id.ToString() + "> " +
-                "\r\nUsername: <" + Context.User.Username.ToString() + ">" + " Channel ID: <" + Context.Channel.Id + ">" + " Mentioned user: <" + user + ">");
+             string Message = "Command **!mute** requested by <@" + Context.Message.Author.Id  + Environment.NewLine +
+                "in channel <#" + Context.Channel.Id + ">" + "Mentioned User: <" + user.Mention + ">" + " Mute reason: <" + reason + ">";
+
         }
     }
 }

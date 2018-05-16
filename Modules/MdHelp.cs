@@ -14,8 +14,8 @@ namespace RyuBot
         [RequireUserPermission(GuildPermission.ManageMessages)]
         public async Task SendHelp()
         {
-            var messages = await this.Context.Channel.GetMessagesAsync(1).Flatten();
-            await this.Context.Channel.DeleteMessagesAsync(messages);
+            var ReturnMsg = await Context.Channel.GetMessagesAsync(1).Flatten();
+            await Context.Channel.DeleteMessagesAsync(ReturnMsg);
             await Context.Channel.SendMessageAsync("**Bot usage:**" +
                 "\r\n```" +
                 "\r\n!warn<@user> : Warns the mentioned user." +
@@ -31,9 +31,10 @@ namespace RyuBot
                 "\r\n!delete <value> : Deletes the specified amount of previous messages." +
                 "```" +
                 "\r\nPS: **ALL COMMANDS ARE LOGGED!**I am always watching ; 3");
-            Console.BackgroundColor = ConsoleColor.DarkYellow;
-            Console.WriteLine(time + ":: Command Request: !help; " + "ID <" + Context.User.Id.ToString() + "> " +
-                "\r\nUsername: <" + Context.User.Username.ToString() + ">" + " Channel ID: <" + Context.Channel.Id + ">");
+           string Message = "Command **!help** requested by <@" + Context.Message.Author.Id  + Environment.NewLine +
+                             "in channel <#" + Context.Channel.Id + ">";
+
+            await Helper.LoggingAsync(new LogMessage(LogSeverity.Verbose, "Module", Message));
         }
     }
 }

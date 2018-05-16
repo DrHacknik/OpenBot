@@ -14,12 +14,13 @@ namespace RyuBot.Modules
         public async Task Say_Hello()
 
         {
-            var messages = await this.Context.Channel.GetMessagesAsync(1).Flatten();
-            await this.Context.Channel.DeleteMessagesAsync(messages);
+            var ReturnMsg = await Context.Channel.GetMessagesAsync(1).Flatten();
+            await Context.Channel.DeleteMessagesAsync(ReturnMsg);
             await Context.Channel.SendMessageAsync("**I did not do it, I did not hit her; I did nawt!**");
-            Console.BackgroundColor = ConsoleColor.DarkYellow;
-            Console.WriteLine(time + ":: Command Request: !sayhello; " + "ID <" + Context.User.Id.ToString() + "> " +
-                "\r\nUsername: <" + Context.User.Username.ToString() + ">" + " Channel ID: <" + Context.Channel.Id + ">");
+            string Message = "Command **!sayhello** requested by <@" + Context.Message.Author.Id  + Environment.NewLine +
+                "in channel <#" + Context.Channel.Id + ">" + "Mentioned User: <" + user.Mention + ">";
+
+            await Helper.LoggingAsync(new LogMessage(LogSeverity.Verbose, "Module", Message));
         }
     }
 }

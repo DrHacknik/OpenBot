@@ -10,9 +10,6 @@ namespace RyuBot.Modules
 {
     public class MdDeleteMessages : ModuleBase<SocketCommandContext>
     {
-        private static readonly AutoResetEvent _ResetEvent = new AutoResetEvent(false);
-
-
         [Command("Delete")]
         [RequireUserPermission(GuildPermission.ManageMessages)]
         public async Task DeleteMessages(int Number, ulong ChannelId = 0, [Remainder]string Reason = "Unknown")

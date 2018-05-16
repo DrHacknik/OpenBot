@@ -12,20 +12,21 @@ namespace RyuBot.Modules
 
         [Command("Input")]
         [RequireUserPermission(GuildPermission.ManageMessages)]
-        public async Task DoThatInput([Remainder]string message)
+        public async Task DoThatInput([Remainder]string IMessage)
         {
-            var messages = await this.Context.Channel.GetMessagesAsync(1).Flatten();
-            await this.Context.Channel.DeleteMessagesAsync(messages);
+            var ReturnMsg = await Context.Channel.GetMessagesAsync(1).Flatten();
+            await Context.Channel.DeleteMessagesAsync(ReturnMsg);
             //var embed = new EmbedBuilder();
             //embed.WithTitle("Inputed message");
             //embed.WithDescription(message);
-            //embed.WithColor(new Color(0, 255, 0));
-
-            await Context.Channel.SendMessageAsync(message);
-            Console.BackgroundColor = ConsoleColor.DarkYellow;
-            Console.WriteLine(time + ":: Command Request: !input; " + "ID <" + Context.User.Id.ToString() + "> " +
-                "\r\nUsername: <" + Context.User.Username.ToString() + ">" + " Channel ID: <" + Context.Channel.Id + ">" + " Value: " + message);
+            //embed.WithColor(new Color(0, 255, 0))
+            string Message = "Command **!input** requested by <@" + Context.Message.Author.Id + Environment.NewLine +
+                             "in channel <#" + Context.Channel.Id + ">";
+            await Context.Channel.SendMessageAsync(IMessage);
+            await Helper.LoggingAsync(new LogMessage(LogSeverity.Verbose, "Module", Message));
+            await Context.Channel.SendMessageAsync(Message);
         }
+    
 
         /*        private SocketGuild GetSelectedServer(IEnumerable<SocketGuild> servers)
         {

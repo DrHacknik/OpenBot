@@ -18,6 +18,8 @@ namespace RyuBot
         public async Task SendAbout()
 
         {
+            var ReturnMsg = await Context.Channel.GetMessagesAsync(1).Flatten();
+            await Context.Channel.DeleteMessagesAsync(ReturnMsg);
             var messages = await this.Context.Channel.GetMessagesAsync(1).Flatten();
             await this.Context.Channel.DeleteMessagesAsync(messages);
              string Message = "=====================================" + Environment.NewLine +
@@ -32,5 +34,6 @@ namespace RyuBot
 
                 await Helper.LoggingAsync(new LogMessage(LogSeverity.Verbose, "Bot", Message));
                 await Context.Channel.SendMessageAsync(Message);
+        }
     }
 }

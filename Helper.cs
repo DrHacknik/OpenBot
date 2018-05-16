@@ -25,6 +25,7 @@ namespace RyuBot
             {
                 EmbedBuilder Embed = new EmbedBuilder();
                 Embed.WithTitle(LogMsg.Source + " > " + CurrentTime);
+                Embed.WithColor(new Color(0, 0, 255));
                 Embed.WithDescription(LogMsg.Message);
 
                 await ((IMessageChannel)_DiscordClient.GetChannel(Config.BotChannelId)).SendMessageAsync("", false, Embed);

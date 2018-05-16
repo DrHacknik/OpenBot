@@ -29,8 +29,8 @@ namespace RyuBot.Modules
             await Context.Channel.DeleteMessagesAsync(InputMsg);
 
             string Message = "Command **!delete " + Number.ToString() + "** requested by <@" + Context.Message.Author.Id + ">" + Environment.NewLine +
-                             "in channel <#" + Context.Channel.Id + "> for channel <#" + ((ChannelId == 0) ? Context.Channel.Id.ToString() : ChannelId.ToString()) + ">" + Environment.NewLine +
-                             "with reason: *" + Reason + "*";
+                "in channel <#" + Context.Channel.Id + "> for channel <#" + ((ChannelId == 0) ? Context.Channel.Id.ToString() : ChannelId.ToString()) + ">" + Environment.NewLine +
+                "with reason: *" + Reason + "*";
 
             await Helper.LoggingAsync(new LogMessage(LogSeverity.Verbose, "Module", Message));
 

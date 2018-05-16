@@ -21,7 +21,7 @@ namespace RyuBot.Modules
             //embed.WithDescription(message);
             //embed.WithColor(new Color(0, 255, 0))
             string Message = "Command **!input** requested by <@" + Context.Message.Author.Id + Environment.NewLine +
-                             "in channel <#" + Context.Channel.Id + ">";
+                "in channel <#" + Context.Channel.Id + ">";
             await Context.Channel.SendMessageAsync(IMessage);
             await Helper.LoggingAsync(new LogMessage(LogSeverity.Verbose, "Module", Message));
             await Context.Channel.SendMessageAsync(Message);

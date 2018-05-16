@@ -25,7 +25,7 @@ namespace RyuBot
             sting message = 
             "**RAM Usage:** " + CurMem.ToString + Environment.NewLine + 
             "**CPU Usage:** " + CurCPU.ToString + Environment.NewLine + 
-            "**Process Usage:** " + CurProc.ToString + Environment.NewLine + 
+            "**Process Information:** " + CurProc.ToString + Environment.NewLine + 
             "**Current Time:** " + time + Environment.NewLine + 
             "**Bot Version: 0.2.0**" + Environment.NewLine; 
             await Helper.LoggingAsync(new LogMessage(LogSeverity.Verbose, "Bot", Message));

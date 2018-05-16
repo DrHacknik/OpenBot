@@ -44,7 +44,6 @@ namespace RyuBot.Modules
             var ReturnMsg = await Context.Channel.GetMessagesAsync(1).Flatten();
             await Context.Channel.DeleteMessagesAsync(ReturnMsg);
             await Context.Channel.SendMessageAsync("This Command isn't ready yet.");
-            Console.BackgroundColor = ConsoleColor.DarkYellow;
              string Message = "Command **!mute** requested by <@" + Context.Message.Author.Id  + Environment.NewLine +
                 "in channel <#" + Context.Channel.Id + ">" + "Mentioned User: <" + user.Mention + ">" + " Mute reason: <" + reason + ">";
 

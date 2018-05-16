@@ -10,11 +10,12 @@ namespace RyuBot.Modules
     {
         [Command("Warn")]
         [RequireUserPermission(GuildPermission.ManageMessages)]
-        public async Task WarnUser(SocketGuildUser WarnedUser, [Remainder] string WarningReason)
+        public async Task Warn(SocketGuildUser WarnedUser, [Remainder]string WarningReason)
         {
             var ReturnMsg = await Context.Channel.GetMessagesAsync(1).Flatten();
 
             await Context.Channel.DeleteMessagesAsync(ReturnMsg);
+            //Need to fix this message :)
             await Context.Channel.SendMessageAsync(WarnedUser.Mention + " | **Please read the rules on the channel <#411271165429022730>" + Environment.NewLine + "" +
                                                    "You have been formally warned!**" + Environment.NewLine + 
                                                    "You were warned for: " + WarningReason);

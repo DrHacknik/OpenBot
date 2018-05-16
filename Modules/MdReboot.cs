@@ -5,11 +5,8 @@ using System.Threading.Tasks;
 
 namespace RyuBot.Modules
 {
-    public class MdRebpot : ModuleBase<SocketCommandContext>
+    public class MdReboot : ModuleBase<SocketCommandContext>
     {
-        private string cd = System.IO.Directory.GetCurrentDirectory();
-        private string time = DateTime.Now.ToString();
-
         [Command("Reboot")]
         [RequireUserPermission(GuildPermission.ManageMessages)]
         public async Task Reboot()

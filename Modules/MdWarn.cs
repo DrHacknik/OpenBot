@@ -14,9 +14,9 @@ namespace RyuBot.Modules
         {
             var ReturnMsg = await Context.Channel.GetMessagesAsync(1).Flatten();
 
-            await Context.Channel.DeleteMessagesAsync(ReturnMsg);
+            await this.Context.Channel.DeleteMessagesAsync(ReturnMsg);
             //Need to fix this message :)
-            await Context.Channel.SendMessageAsync(WarnedUser.Mention + " | **Please read the rules on the channel <#411271165429022730>" + Environment.NewLine + "" +
+            await this.Context.Channel.SendMessageAsync(WarnedUser.Mention + " | **Please read the rules on the channel <#411271165429022730>" + Environment.NewLine + "" +
                 "You have been formally warned!**" + Environment.NewLine + 
                 "You were warned for: " + WarningReason);
 

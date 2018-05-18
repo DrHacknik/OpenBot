@@ -34,7 +34,7 @@ namespace RyuBot
            string Message = "Command **!help** requested by <@" + Context.Message.Author.Id  + Environment.NewLine +
                              "in channel <#" + Context.Channel.Id + ">";
 
-            await Helper.LoggingAsync(new LogMessage(LogSeverity.Verbose, "Module", Message));
+           await Helper.LoggingAsync(new LogMessage(LogSeverity.Verbose, "Module", Message));
         }
     }
 }

@@ -16,19 +16,19 @@ namespace RyuBot
         private static void Main(string[] args) => new Program().StartAsync().GetAwaiter().GetResult();
 
         private DiscordSocketClient DiscordClient;
-        private CommandHandler      CmdHandler;
+        private CommandHandler CmdHandler;
 
         public async Task StartAsync()
         {
             string ApiKey = File.ReadAllText(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), Config.ApiFile));
-            
+
             DiscordClient = new DiscordSocketClient(new DiscordSocketConfig
             {
                 LogLevel = LogSeverity.Verbose
             });
 
             Helper._DiscordClient = DiscordClient;
-            DiscordClient.Log    += Helper.LoggingAsync;
+            DiscordClient.Log += Helper.LoggingAsync;
 
             try
             {
@@ -45,8 +45,8 @@ namespace RyuBot
             }
             catch (Exception Ex)
             {
-                string ExMessage = "ERROR: Key file is invalid! Or an Internet connection is unavailable." + Environment.NewLine + 
-                                   "ERROR: There was an internal bot error." + Environment.NewLine + 
+                string ExMessage = "ERROR: Key file is invalid! Or an Internet connection is unavailable." + Environment.NewLine +
+                                   "ERROR: There was an internal bot error." + Environment.NewLine +
                                    Ex;
 
                 Helper.RunAsync(Helper.LoggingAsync(new LogMessage(LogSeverity.Verbose, "Bot", ExMessage)));
@@ -59,16 +59,16 @@ namespace RyuBot
             DiscordClient.Ready += async () =>
             {
                 string Message = "=====================================" + Environment.NewLine +
-                                 "RyuBot for Discord" + Environment.NewLine +
+                                 "RyuBot-beta for Discord" + Environment.NewLine +
                                  "by Dr.Hacknik & Ac_K" + Environment.NewLine +
-                                 "Version: 0.2.0" + Environment.NewLine +
+                                 "Version: 0.2.1" + Environment.NewLine +
                                  "Bot name: RyuBot" + Environment.NewLine +
                                  "Bot revision: 18_5_16_0000am" + Environment.NewLine +
                                  "Bot Type: DotNet Core | Web-socket-based" + Environment.NewLine +
                                  "=====================================";
 
-
-                await Helper.LoggingAsync(new LogMessage(LogSeverity.Verbose, "Bot", Message));
+                //await Helper.LoggingAsync(new LogMessage(LogSeverity.Verbose, "Bot", Message));
+                await DiscordClient.SetGameAsync("v0.2.1 - BETA");
             };
 
             await Task.Delay(-1);

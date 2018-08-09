@@ -10,7 +10,7 @@ namespace RyuBot.Modules
         private string cd = System.IO.Directory.GetCurrentDirectory();
         private string time = DateTime.Now.ToString();
 
-        [Command("Input")]
+        [Command("input-beta")]
         [RequireUserPermission(GuildPermission.ManageMessages)]
         public async Task DoThatInput([Remainder]string IMessage)
         {
@@ -24,7 +24,6 @@ namespace RyuBot.Modules
                 "in channel <#" + Context.Channel.Id + ">";
             await Context.Channel.SendMessageAsync(IMessage);
             await Helper.LoggingAsync(new LogMessage(LogSeverity.Verbose, "Module", Message));
-            await Context.Channel.SendMessageAsync(Message);
         }
     
 

@@ -13,6 +13,7 @@ namespace RyuBot
         /*
          * Basic Logging function who don't handle RESTful request log.
          */
+
         public static async Task LoggingAsync(LogMessage LogMsg)
         {
             string CurrentTime = DateTime.Now.ToString();
@@ -25,7 +26,7 @@ namespace RyuBot
             {
                 EmbedBuilder Embed = new EmbedBuilder();
                 Embed.WithTitle(LogMsg.Source + " > " + CurrentTime);
-                Embed.WithColor(new Color(0, 0, 255));
+                Embed.WithColor(new Color(236, 183, 4));
                 Embed.WithDescription(LogMsg.Message);
 
                 await ((IMessageChannel)_DiscordClient.GetChannel(Config.BotChannelId)).SendMessageAsync("", false, Embed);
@@ -35,6 +36,7 @@ namespace RyuBot
         /*
          * Run Async function as Sync one.
          */
+
         public static void RunAsync(Task task)
         {
             task.ContinueWith(t => { }, TaskContinuationOptions.OnlyOnFaulted);

@@ -49,7 +49,8 @@ mostly used on Linux systems and servers.
 
 All Config Strings are stored within `Config.cs`
 Although, hopefully sometime soon I will implement
-a proper Config parser later on. Most likely XML.
+a proper Config parser later on. Most likely XML or
+JSON.
 
 ----------------------------------------------
 

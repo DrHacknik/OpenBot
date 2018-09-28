@@ -22,7 +22,7 @@ namespace RyuBot.Modules {
             Random rand;
             rand = new Random ();
             if (((SocketTextChannel) Context.Channel).IsNsfw) {
-                string[] Lewds = Directory.GetFiles ("", "*.*", SearchOption.TopDirectoryOnly);
+                string[] Lewds = Directory.GetFiles (Config.LewdDir, "*.*", SearchOption.TopDirectoryOnly);
 
                 int randomIndex = rand.Next (Lewds.Length);
                 string LewdPost = Lewds[randomIndex];

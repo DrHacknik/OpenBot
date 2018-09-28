@@ -1,75 +1,43 @@
-﻿using Discord;
-using Discord.Commands;
-using System;
+﻿using System;
 using System.Threading.Tasks;
+using Discord;
+using Discord.Commands;
 
-namespace RyuBot.Modules
-{
-    public class MdInput : ModuleBase<SocketCommandContext>
-    {
-        private string cd = System.IO.Directory.GetCurrentDirectory();
-        private string time = DateTime.Now.ToString();
+namespace RyuBot.Modules {
+    public class MdInput : ModuleBase<SocketCommandContext> {
+        private string cd = System.IO.Directory.GetCurrentDirectory ();
+        private string time = DateTime.Now.ToString ();
 
-        [Command("input-beta")]
-        [RequireUserPermission(GuildPermission.ManageMessages)]
-        public async Task DoThatInput([Remainder]string IMessage)
-        {
-            var ReturnMsg = await Context.Channel.GetMessagesAsync(1).Flatten();
-            await Context.Channel.DeleteMessagesAsync(ReturnMsg);
+        [Command ("input-beta")]
+        [RequireUserPermission (GuildPermission.ManageMessages)]
+        public async Task DoThatInput ([Remainder] string IMessage) {
+            await Context.Message.DeleteAsync ();
             //var embed = new EmbedBuilder();
             //embed.WithTitle("Inputed message");
             //embed.WithDescription(message);
             //embed.WithColor(new Color(0, 255, 0))
-            string Message = "Command **!input** requested by <@" + Context.Message.Author.Id + Environment.NewLine +
+            string Message = "Command **!input** requested by " + Context.User.Username + Environment.NewLine +
                 "in channel <#" + Context.Channel.Id + ">";
-            await Context.Channel.SendMessageAsync(IMessage);
-            await Helper.LoggingAsync(new LogMessage(LogSeverity.Verbose, "Module", Message));
-        }
-    
+            await Context.Channel.SendMessageAsync (IMessage);
 
-        /*        private SocketGuild GetSelectedServer(IEnumerable<SocketGuild> servers)
-        {
-            var socketServers = servers.ToList();
-            var MaxIndex = servers.Count() -1;
-            for (var i = 0; i <= MaxIndex; i++)
-            {
-                Console.WriteLine($"{i} - {socketServers[i].Name}");
-            }
-
-            var selectedIndex = -1;
-            while(selectedIndex < 0 || selectedIndex > MaxIndex)
-            {
-               var success = int.TryParse(Console.ReadLine().Trim(), out selectedIndex);
-                if (!success) Console.WriteLine("Sorry, that was an invalid index.");
-                //if (selectedIndex < 0 || selectedIndex > MaxIndex) Console.WriteLine("");
-                //{
-
-                //}
-            }
-            return socketServers[selectedIndex];
+            await Helper.LoggingAsync (new LogMessage (LogSeverity.Verbose, "Module", Message));
         }
 
-        private SocketTextChannel GetSelectedChannel(IEnumerable<SocketTextChannel> channels)
-        {
-            var textChannels = channels.ToList();
-            var MaxIndex = channels.Count() - 1;
-            for (var i = 0; i <= MaxIndex; i++)
-            {
-                Console.WriteLine($"{i} - {textChannels[i].Name}");
-            }
+        [Command ("input-embed")]
+        [RequireUserPermission (GuildPermission.ManageMessages)]
+        public async Task InputEmdbed ([Remainder] string IMessage) {
+            await Context.Message.DeleteAsync ();
 
-            var selectedIndex = -1;
-            while (selectedIndex < 0 || selectedIndex > MaxIndex)
-            {
-                var success = int.TryParse(Console.ReadLine().Trim(), out selectedIndex);
-                if (!success) Console.WriteLine("Sorry, that was an invalid index.");
-                //if (selectedIndex < 0 || selectedIndex > MaxIndex) Console.WriteLine("");
-                //{
+            EmbedBuilder Embed = new EmbedBuilder ();
+            Embed.WithTitle ("Message:");
+            Embed.WithColor (new Color (236, 183, 4));
+            Embed.WithDescription (IMessage);
+            await Context.Channel.SendMessageAsync (String.Empty, false, Embed.Build ());
 
-                //}
-            }
-            return textChannels[selectedIndex];
-        }*/
+            string Message = "Command **!input** requested by " + Context.User.Username + Environment.NewLine +
+                "in channel <#" + Context.Channel.Id + ">";
+
+            await Helper.LoggingAsync (new LogMessage (LogSeverity.Verbose, "Module", Message));
+        }
     }
 }
- 

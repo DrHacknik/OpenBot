@@ -1,36 +1,35 @@
-﻿using Discord;
-using Discord.Commands;
-using System;
+﻿using System;
 using System.Threading.Tasks;
+using Discord;
+using Discord.Commands;
 
-namespace RyuBot
-{
-    public class About : ModuleBase<SocketCommandContext>
-    {
-        private string cd = System.IO.Directory.GetCurrentDirectory();
+namespace RyuBot {
+    public class About : ModuleBase<SocketCommandContext> {
+        private string cd = System.IO.Directory.GetCurrentDirectory ();
 
-        private string time = DateTime.Now.ToString();
+        private string time = DateTime.Now.ToString ();
 
-        private string key_stat = "ubuntu-x64";
+        [Command ("About-beta")]
+        [RequireUserPermission (GuildPermission.ManageMessages)]
+        public async Task SendAbout () {
+            EmbedBuilder Embed = new EmbedBuilder ();
+            Embed.WithTitle ("About Awoo Bot [Beta]:");
+            Embed.WithColor (new Color (236, 183, 4));
+            Embed.WithImageUrl ("https://i.imgur.com/bplcGZ7.png");
+            Embed.WithDescription (
+                "**Awoo-bot-beta for Discord**" + Environment.NewLine +
+                "**by Dr.Hacknik**" + Environment.NewLine +
+                "**Version:** " + Config.Version + Environment.NewLine +
+                "**Bot name:** Awoobot" + Environment.NewLine +
+                "**Bot revision:** " + Config.BuildDate + Environment.NewLine +
+                "**Bot Type:** DotNet Core | Web-socket-based" + Environment.NewLine +
+                "**Bot Platform:** " + Config.OS + Environment.NewLine);
+            Embed.WithTimestamp (DateTime.UtcNow);
+            await Context.Channel.SendMessageAsync (String.Empty, false, Embed.Build ());
 
-        [Command("About")]
-        [RequireUserPermission(GuildPermission.ManageMessages)]
-        public async Task SendAbout()
+            await Context.Message.DeleteAsync ();
 
-        {
-            var ReturnMsg = await Context.Channel.GetMessagesAsync(1).Flatten();
-            await Context.Channel.DeleteMessagesAsync(ReturnMsg);
-            string Message = "=====================================" + Environment.NewLine +
-            "RyuBot-beta for Discord" + Environment.NewLine +
-            "by Dr.Hacknik & Ac_K" + Environment.NewLine +
-            "Version: 0.2.1" + Environment.NewLine +
-            "Bot name: RyuBot" + Environment.NewLine +
-            "Bot revision: 18_5_16_0000am" + Environment.NewLine +
-            "Bot Type: DotNet Core | Web-socket-based" + Environment.NewLine +
-            "=====================================";
-
-            await Helper.LoggingAsync(new LogMessage(LogSeverity.Verbose, "Bot", Message));
-            await Context.Channel.SendMessageAsync(Message);
+            await Helper.LoggingAsync (new LogMessage (LogSeverity.Verbose, "Bot", ""));
         }
     }
 }

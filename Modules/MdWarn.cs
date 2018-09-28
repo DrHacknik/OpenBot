@@ -1,29 +1,33 @@
-﻿using Discord;
+﻿using System;
+using System.Threading.Tasks;
+using Discord;
 using Discord.Commands;
 using Discord.WebSocket;
-using System;
-using System.Threading.Tasks;
 
-namespace RyuBot.Modules
-{
-    public class MdWarn : ModuleBase<SocketCommandContext>
-    {
-        [Command("Warn")]
-        [RequireUserPermission(GuildPermission.ManageMessages)]
-        public async Task Warn(SocketGuildUser WarnedUser, [Remainder]string WarningReason)
-        {
-            var ReturnMsg = await Context.Channel.GetMessagesAsync(1).Flatten();
+namespace RyuBot.Modules {
+    public class MdWarn : ModuleBase<SocketCommandContext> {
+        [Command ("Warn-beta")]
+        [RequireUserPermission (GuildPermission.ManageMessages)]
+        public async Task Warn (SocketGuildUser WarnedUser, [Remainder] string WarningReason) {
+            string CurrentTime = DateTime.Now.ToString ();
+            await Context.Message.DeleteAsync ();
 
-            await this.Context.Channel.DeleteMessagesAsync(ReturnMsg);
-            //Need to fix this message :)
-            await this.Context.Channel.SendMessageAsync(WarnedUser.Mention + " | **Please read the rules on the channel <#411271165429022730>" + Environment.NewLine + "" +
-                "You have been formally warned!**" + Environment.NewLine + 
-                "You were warned for: " + WarningReason);
+            string Imessage = WarnedUser.Mention + " | **Please read the rules on the channel #rules" + Environment.NewLine + "" +
+                "You have been formally warned!**" + Environment.NewLine +
+                "You were warned for: " + WarningReason;
+            EmbedBuilder Embed = new EmbedBuilder ();
+            Embed.WithColor (new Color (255, 0, 0));
+            Embed.WithDescription (Imessage);
+            await Context.Channel.SendMessageAsync (String.Empty, false, Embed.Build ());
 
-            string Message = "Command **!warn** requested by <@" + Context.Message.Author.Id + "> to <" + WarnedUser.Mention + ">" + Environment.NewLine +
+            string Message = "Command **!warn** requested by " + Context.User.Username + "> to <" + WarnedUser.Mention + ">" + Environment.NewLine +
                 "in channel <#" + Context.Channel.Id + "> with warning reason: *" + WarningReason + "*";
+            EmbedBuilder EmbedLog = new EmbedBuilder ();
+            EmbedLog.WithColor (new Color (236, 183, 4));
+            EmbedLog.WithDescription (Message);
+            Embed.WithTimestamp (DateTime.UtcNow);
 
-            await Helper.LoggingAsync(new LogMessage(LogSeverity.Verbose, "Module", Message));
+            await Helper.LoggingAsync (new LogMessage (LogSeverity.Verbose, "Module", Message));
         }
     }
 }

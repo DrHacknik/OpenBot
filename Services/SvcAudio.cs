@@ -40,7 +40,7 @@ public class SvcAudio
             //await Log(LogSeverity.Info, $"Disconnected from voice on {guild.Name}.");
         }
     }
-    
+
     public async Task SendAudioAsync(IGuild guild, IMessageChannel channel, string path)
     {
         // Your task: Get a full path to the file if the value of 'path' is only a filename.

@@ -1,4 +1,6 @@
-﻿namespace RyuBot
+﻿using System;
+
+namespace OpenBot
 {
     public static class Config
     {
@@ -7,6 +9,7 @@
         public static string StatusFile = "OpenStatus";
         public static string GameStatus;
         public static string LewdDir;
+        public static string BotDir = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\OpenBot"; //Could be "%appdata%/BotName/" if on Windows or "/home/username/.config/BotName/" if on Linux.
         public static string Version = "0.2.5.1";
         public static string VersionSlim = "0_2_5_1";
         public static string BuildDate = "9/28/2018: 5:44pm EST";

@@ -1,20 +1,22 @@
-using System;
-using System.IO;
-using System.Threading.Tasks;
 using Discord;
 using Discord.Commands;
 using Discord.WebSocket;
+using System;
+using System.Threading.Tasks;
 
-namespace RyuBot.Modules {
-    public class MdHug : ModuleBase<SocketCommandContext> {
-        private string time = DateTime.Now.ToString ();
+namespace OpenBot.Modules
+{
+    public class MdHug : ModuleBase<SocketCommandContext>
+    {
+        private string time = DateTime.Now.ToString();
         private string[] Hugs;
 
-        [Command ("hug")]
-        public async Task Kissed (SocketGuildUser MentionedUser) {
+        [Command("hug")]
+        public async Task Kissed(SocketGuildUser MentionedUser)
+        {
             Random rand;
 
-            rand = new Random ();
+            rand = new Random();
             Hugs = new string[] {
                 "https://media1.tenor.com/images/506aa95bbb0a71351bcaa753eaa2a45c/tenor.gif?itemid=7552075",
                 "https://thumbs.gfycat.com/WellgroomedVapidKitten-small.gif",
@@ -31,22 +33,22 @@ namespace RyuBot.Modules {
                 "http://i.imgur.com/pME21N2.gif"
             };
 
-            await Context.Message.DeleteAsync ();
-            int randomIndex = rand.Next (Hugs.Length);
+            await Context.Message.DeleteAsync();
+            int randomIndex = rand.Next(Hugs.Length);
             string HugPost = Hugs[randomIndex];
 
-            EmbedBuilder Embed = new EmbedBuilder ();
-            Embed.WithTitle (MentionedUser.Username + " you have been hugged by " + Context.User.Username);
-            Embed.WithColor (new Color (236, 183, 4));
-            Embed.WithImageUrl (HugPost);
-            Embed.WithDescription ("UwU Hug~");
-            Embed.WithTimestamp (DateTime.UtcNow);
-            await Context.Channel.SendMessageAsync (String.Empty, false, Embed.Build ());
+            EmbedBuilder Embed = new EmbedBuilder();
+            Embed.WithTitle(MentionedUser.Username + " you have been hugged by " + Context.User.Username);
+            Embed.WithColor(new Color(236, 183, 4));
+            Embed.WithImageUrl(HugPost);
+            Embed.WithDescription("UwU Hug~");
+            Embed.WithTimestamp(DateTime.UtcNow);
+            await Context.Channel.SendMessageAsync(String.Empty, false, Embed.Build());
 
             string Message = "Command **!hug** requested by " + Context.User.Username + Environment.NewLine +
                 "in channel <#" + Context.Channel.Id + ">";
 
-            await Helper.LoggingAsync (new LogMessage (LogSeverity.Verbose, "Module", Message));
+            await Helper.LoggingAsync(new LogMessage(LogSeverity.Verbose, "Module", Message));
         }
     }
 }

@@ -30,7 +30,7 @@ public class MdMusic : ModuleBase<ICommandContext>
     {
         await _service.LeaveAudio(Context.Guild);
     }
-    
+
     [Command("play", RunMode = RunMode.Async)]
     public async Task PlayCmd([Remainder] string song)
     {

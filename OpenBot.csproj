@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <AssemblyName>OpenBot</AssemblyName>
+    <RootNamespace>OpenBot</RootNamespace>
+    <RuntimeModifier>linux-x64</RuntimeModifier>
+    <Platforms>AnyCPU;x86</Platforms>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <Optimize>false</Optimize>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Discord.Net" Version="2.0.0-beta" />
+    <PackageReference Include="Discord.Net.Commands" Version="2.0.0-beta" />
+    <PackageReference Include="Discord.Net.Core" Version="2.0.0-beta" />
+    <PackageReference Include="Discord.Net.Rest" Version="2.0.0-beta" />
+    <PackageReference Include="Discord.Net.Webhook" Version="2.0.0-beta" />
+    <PackageReference Include="Discord.Net.WebSocket" Version="2.0.0-beta" />
+  </ItemGroup>
+</Project>

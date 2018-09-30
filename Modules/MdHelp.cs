@@ -19,7 +19,7 @@ namespace OpenBot
             EmbedBuilder Embed = new EmbedBuilder();
             Embed.WithTitle("Bot Usage:");
             Embed.WithColor(new Color(236, 183, 4));
-            Embed.WithImageUrl("https://github.com/DrHacknik/OpenBot/blob/master/Splash.png?raw=true");
+            Embed.WithImageUrl("https://github.com/DrHacknik/OpenBot/blob/master/Splash_256.png?raw=true");
             Embed.WithDescription("\r\n" +
                 "\r\n**!warn-beta <@user>** : Warns the mentioned user." +
                 "\r\n**!rickroll <@user>** : RickRolls the mentioned user." +

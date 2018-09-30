@@ -1,22 +1,19 @@
+using System;
+using System.Threading.Tasks;
 using Discord;
 using Discord.Commands;
 using Discord.WebSocket;
-using System;
-using System.Threading.Tasks;
 
-namespace OpenBot.Modules
-{
-    public class MdInsults : ModuleBase<SocketCommandContext>
-    {
-        private string time = DateTime.Now.ToString();
+namespace OpenBot.Modules {
+    public class MdInsults : ModuleBase<SocketCommandContext> {
+        private string time = DateTime.Now.ToString ();
         private string[] Insults;
 
-        [Command("insult")]
-        public async Task SendInsult(SocketGuildUser MentionedUser)
-        {
+        [Command ("insult")]
+        public async Task SendInsult (SocketGuildUser MentionedUser) {
             Random rand;
 
-            rand = new Random();
+            rand = new Random ();
             Insults = new string[] {
                 "Roses are red, Violets are blue. I am gay, and so are you.",
                 "Hey, you have something on your chin... no, the 3rd one down.",
@@ -38,21 +35,21 @@ namespace OpenBot.Modules
                 "I love what you've done with your hair! How do you get it to come out of the nostrils like that?"
             };
 
-            await Context.Message.DeleteAsync();
-            int randomIndex = rand.Next(Insults.Length);
+            await Context.Message.DeleteAsync ();
+            int randomIndex = rand.Next (Insults.Length);
             string InsultPost = Insults[randomIndex];
 
-            EmbedBuilder Embed = new EmbedBuilder();
-            Embed.WithTitle(MentionedUser.Username + ", enjoy your insult >:3");
-            Embed.WithColor(new Color(236, 183, 4));
-            Embed.WithDescription("'" + InsultPost + "'");
-            Embed.WithTimestamp(DateTime.UtcNow);
-            await Context.Channel.SendMessageAsync(String.Empty, false, Embed.Build());
+            EmbedBuilder Embed = new EmbedBuilder ();
+            Embed.WithTitle (MentionedUser.Username + ", enjoy your insult >:3");
+            Embed.WithColor (new Color (236, 183, 4));
+            Embed.WithDescription ("'" + InsultPost + "'");
+            Embed.WithTimestamp (DateTime.UtcNow);
+            await Context.Channel.SendMessageAsync (String.Empty, false, Embed.Build ());
 
             string Message = "Command **!insult** requested by " + Context.User.Username + Environment.NewLine +
                 "in channel <#" + Context.Channel.Id + ">" + " to " + MentionedUser.Username;
 
-            await Helper.LoggingAsync(new LogMessage(LogSeverity.Verbose, "Module", Message));
+            await Helper.LoggingAsync (new LogMessage (LogSeverity.Verbose, "Module", Message));
         }
     }
 }

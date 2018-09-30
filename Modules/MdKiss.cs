@@ -1,22 +1,19 @@
-﻿using Discord;
+﻿using System;
+using System.Threading.Tasks;
+using Discord;
 using Discord.Commands;
 using Discord.WebSocket;
-using System;
-using System.Threading.Tasks;
 
-namespace OpenBot.Modules
-{
-    public class MdKiss : ModuleBase<SocketCommandContext>
-    {
-        private string time = DateTime.Now.ToString();
+namespace OpenBot.Modules {
+    public class MdKiss : ModuleBase<SocketCommandContext> {
+        private string time = DateTime.Now.ToString ();
         private string[] Kisses;
 
-        [Command("kiss")]
-        public async Task Kissed(SocketGuildUser MentionedUser)
-        {
+        [Command ("kiss")]
+        public async Task Kissed (SocketGuildUser MentionedUser) {
             Random rand;
 
-            rand = new Random();
+            rand = new Random ();
             Kisses = new string[] {
                 "https://thumbs.gfycat.com/BrownAmusingBeardeddragon-size_restricted.gif",
                 "https://media.giphy.com/media/4gVv2ERASSYYo/giphy.gif",
@@ -45,22 +42,22 @@ namespace OpenBot.Modules
                 "https://thumbs.gfycat.com/FoolhardyThirdIbis-size_restricted.gif"
             };
 
-            await Context.Message.DeleteAsync();
-            int randomIndex = rand.Next(Kisses.Length);
+            await Context.Message.DeleteAsync ();
+            int randomIndex = rand.Next (Kisses.Length);
             string KissPost = Kisses[randomIndex];
 
-            EmbedBuilder Embed = new EmbedBuilder();
-            Embed.WithTitle(MentionedUser.Username + " you have been kissed by " + Context.User.Username);
-            Embed.WithColor(new Color(236, 183, 4));
-            Embed.WithImageUrl(KissPost);
-            Embed.WithDescription("UwU Kiss~");
-            Embed.WithTimestamp(DateTime.UtcNow);
-            await Context.Channel.SendMessageAsync(String.Empty, false, Embed.Build());
+            EmbedBuilder Embed = new EmbedBuilder ();
+            Embed.WithTitle (MentionedUser.Username + " you have been kissed by " + Context.User.Username);
+            Embed.WithColor (new Color (236, 183, 4));
+            Embed.WithImageUrl (KissPost);
+            Embed.WithDescription ("UwU Kiss~");
+            Embed.WithTimestamp (DateTime.UtcNow);
+            await Context.Channel.SendMessageAsync (String.Empty, false, Embed.Build ());
 
             string Message = "Command **!kiss** requested by " + Context.User.Username + Environment.NewLine +
                 "in channel <#" + Context.Channel.Id + ">";
 
-            await Helper.LoggingAsync(new LogMessage(LogSeverity.Verbose, "Module", Message));
+            await Helper.LoggingAsync (new LogMessage (LogSeverity.Verbose, "Module", Message));
         }
     }
 }

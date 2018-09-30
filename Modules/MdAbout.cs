@@ -17,7 +17,7 @@ namespace OpenBot {
             Embed.WithColor (new Color (236, 183, 4));
             Embed.WithImageUrl ("https://github.com/DrHacknik/OpenBot/blob/master/Splash_256.png?raw=true");
             Embed.WithDescription (
-                "**" + Config.BotName + "** for Discord**" + Environment.NewLine +
+                "**" + Config.BotName + "** for Discord" + Environment.NewLine +
                 "**by Dr.Hacknik**" + Environment.NewLine +
                 "**Version:** " + Config.Version + Environment.NewLine +
                 "**Bot name:** " + Config.BotName + Environment.NewLine +

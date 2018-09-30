@@ -20,7 +20,7 @@ namespace OpenBot {
                 "**" + Config.BotName + "** for Discord**" + Environment.NewLine +
                 "**by Dr.Hacknik**" + Environment.NewLine +
                 "**Version:** " + Config.Version + Environment.NewLine +
-                "**Bot name:**" + Config.BotName + Environment.NewLine +
+                "**Bot name:** " + Config.BotName + Environment.NewLine +
                 "**Bot revision:** " + Config.BuildDate + Environment.NewLine +
                 "**Bot Type:** DotNet Core | Web-socket-based" + Environment.NewLine +
                 "**Bot Platform:** " + Config.OS + Environment.NewLine);

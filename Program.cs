@@ -75,7 +75,7 @@ namespace OpenBot
             CreateBotDir();
             Console.ForegroundColor = ConsoleColor.Magenta;
             Console.Clear();
-            Helper.RunAsync(Helper.LoggingAsync(new LogMessage(LogSeverity.Verbose, "Bot", "========================================================================\r\n\\^.^/ Starting OpenBot~\r\nVersion: " + Config.Version + "\r\nPlatform: " + Config.OS + "\r\n========================================================================\r\n")));
+            Helper.RunAsync(Helper.LoggingAsync(new LogMessage(LogSeverity.Verbose, "Bot", "========================================================================\r\n\\^.^/ Starting" + Config.BotName + "~\r\nVersion: " + Config.Version + "\r\nPlatform: " + Config.OS + "\r\n========================================================================\r\n")));
             Console.ForegroundColor = ConsoleColor.White;
             if (!File.Exists(Path.Combine(cd + "\\" + Config.ApiFile)))
             {
@@ -130,10 +130,10 @@ namespace OpenBot
             DiscordClient.Ready += async () =>
             {
                 string Message = "=====================================" + Environment.NewLine +
-                    "Open-Bot-beta for Discord" + Environment.NewLine +
+                    Config.BotName + " for Discord" + Environment.NewLine +
                     "by Dr.Hacknik" + Environment.NewLine +
                     "Version: " + Config.Version + Environment.NewLine +
-                    "Bot name: OpenBot" + Environment.NewLine +
+                    "Bot name: " + Config.BotName + Environment.NewLine +
                     "Bot revision: " + Config.BuildDate + Environment.NewLine +
                     "Bot Type: DotNet Core | Web-socket-based" + Environment.NewLine +
                     "Bot Plaform: " + Config.OS + Environment.NewLine +

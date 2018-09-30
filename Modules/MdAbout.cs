@@ -18,7 +18,7 @@ namespace OpenBot
             EmbedBuilder Embed = new EmbedBuilder();
             Embed.WithTitle("About Awoo Bot [Beta]:");
             Embed.WithColor(new Color(236, 183, 4));
-            Embed.WithImageUrl("https://i.imgur.com/bplcGZ7.png");
+            Embed.WithImageUrl("https://github.com/DrHacknik/OpenBot/blob/master/Splash.png?raw=true");
             Embed.WithDescription(
                 "**Open-Bot-beta for Discord**" + Environment.NewLine +
                 "**by Dr.Hacknik**" + Environment.NewLine +

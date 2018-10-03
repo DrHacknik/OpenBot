@@ -12,10 +12,6 @@ namespace OpenBot.Modules {
         [RequireUserPermission (GuildPermission.ManageMessages)]
         public async Task DoThatInput ([Remainder] string IMessage) {
             await Context.Message.DeleteAsync ();
-            //var embed = new EmbedBuilder();
-            //embed.WithTitle("Inputed message");
-            //embed.WithDescription(message);
-            //embed.WithColor(new Color(0, 255, 0))
             string Message = "Command **!input** requested by " + Context.User.Username + Environment.NewLine +
                 "in channel <#" + Context.Channel.Id + ">";
             await Context.Channel.SendMessageAsync (IMessage);

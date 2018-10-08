@@ -36,7 +36,7 @@ namespace OpenBot
                 "\r\n**!rollnumber** : Random Int number." +
                 "\r\n**!rollrole** : Random Role value." +
                 "\r\n**!userinfo <@user> <image size: One value only, ex 64. If null, then 128 is used>** : Shows the mentioned user's information and avatar image." +
-                "\r\n**!delete-beta <value>** : Deletes the specified amount of previous messages. *Broken right now*");
+                "\r\n**!delete-beta <value>** : Deletes the specified amount of previous messages.");
             Embed.WithTimestamp(DateTime.Now);
             await Context.Channel.SendMessageAsync(string.Empty, false, Embed.Build());
 

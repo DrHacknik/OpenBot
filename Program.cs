@@ -75,7 +75,7 @@ namespace OpenBot
             CreateBotDir();
             Console.ForegroundColor = ConsoleColor.Magenta;
             Console.Clear();
-            Helper.RunAsync(Helper.LoggingAsync(new LogMessage(LogSeverity.Verbose, "Bot", "========================================================================\r\n\\^.^/ Starting" + Config.BotName + "~\r\nVersion: " + Config.Version + "\r\nPlatform: " + Config.OS + "\r\n========================================================================\r\n")));
+            Helper.RunAsync(Helper.LoggingAsync(new LogMessage(LogSeverity.Verbose, "Bot", "========================================================================\r\n\\^.^/ Starting " + Config.BotName + "~\r\nVersion: " + Config.Version + "\r\nPlatform: " + Config.OS + "\r\n========================================================================\r\n")));
             Console.ForegroundColor = ConsoleColor.White;
             if (!File.Exists(Path.Combine(cd + "\\" + Config.ApiFile)))
             {

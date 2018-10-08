@@ -161,10 +161,13 @@ namespace OpenBot
 
         public static async Task SetStatus()
         {
-            int Count = DiscordClient.Guilds.Count();
-            string SCount = Count.ToString();
-            await DiscordClient.SetGameAsync("on " + SCount + " Guilds.");
-            return;
+            while (true)
+            {
+                int Count = DiscordClient.Guilds.Count();
+                string SCount = Count.ToString();
+                await DiscordClient.SetGameAsync("on " + SCount + " Guilds.");
+                await Task.Delay(-1);
+            }
         }
 
         public static void CreateBotDir()

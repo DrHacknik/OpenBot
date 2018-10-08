@@ -4,6 +4,7 @@ using System;
 using System.IO;
 using System.Threading.Tasks;
 using System.Collections;
+using System.Linq;
 
 /*
 ==============================================
@@ -160,8 +161,9 @@ namespace OpenBot
 
         public static async Task SetStatus()
         {
-            await DiscordClient.SetGameAsync(Config.GameStatus);
-            SaveConfig();
+            int Count = DiscordClient.Guilds.Count();
+            string SCount = Count.ToString();
+            await DiscordClient.SetGameAsync("on " + SCount + " Guilds.");
             return;
         }
 
@@ -190,7 +192,6 @@ namespace OpenBot
         {
             File.Create(cd + "\\Config\\Config.ini");
             parser.AddSetting("botsettings", "botlewddir");
-            parser.AddSetting("botsettings", "gamestatus");
             parser.AddSetting("botsettings", "logwithoutstamp");
             parser.SaveSettings(cd + "\\Config\\Config.ini");
             return;
@@ -199,7 +200,6 @@ namespace OpenBot
         public static void SaveConfig()
         {
             parser.AddSetting("botsettings", "botlewddir", Config.LewdDir);
-            parser.AddSetting("botsettings", "gamestatus", Config.GameStatus);
             parser.AddSetting("botsettings", "logwithoutstamp", Config.LogWithoutStamp);
             parser.SaveSettings(cd + "\\Config\\Config.ini");
             return;
@@ -210,7 +210,6 @@ namespace OpenBot
             try //Parse the config file
             {
                 Config.LewdDir = parser.GetSetting("botsettings", "botlewddir");
-                Config.GameStatus += parser.GetSetting("botsettings", "gamestatus");
                 Config.LogWithoutStamp += parser.GetSetting("botsettings", "logwithoutstamp");
                 await SetStatus();
             }

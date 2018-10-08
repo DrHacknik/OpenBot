@@ -1,23 +1,26 @@
-﻿using System;
-using System.Threading.Tasks;
-using Discord;
+﻿using Discord;
 using Discord.Commands;
+using System;
+using System.Threading.Tasks;
 
-namespace OpenBot {
-    public class Help : ModuleBase<SocketCommandContext> {
-        private string cd = System.IO.Directory.GetCurrentDirectory ();
-        private string time = DateTime.Now.ToString ();
+namespace OpenBot
+{
+    public class Help : ModuleBase<SocketCommandContext>
+    {
+        private string cd = System.IO.Directory.GetCurrentDirectory();
+        private string time = DateTime.Now.ToString();
 
-        [RequireUserPermission (GuildPermission.ManageMessages)]
-        [Command ("Help-beta")]
-        public async Task SendHelp () {
-            await Context.Message.DeleteAsync ();
+        [RequireUserPermission(GuildPermission.ManageMessages)]
+        [Command("Help-beta")]
+        public async Task SendHelp()
+        {
+            await Context.Message.DeleteAsync();
 
-            EmbedBuilder Embed = new EmbedBuilder ();
-            Embed.WithTitle ("Bot Usage:");
-            Embed.WithColor (new Color (236, 183, 4));
-            Embed.WithImageUrl ("https://github.com/DrHacknik/OpenBot/blob/master/Splash_256.png?raw=true");
-            Embed.WithDescription ("\r\n" +
+            EmbedBuilder Embed = new EmbedBuilder();
+            Embed.WithTitle("Bot Usage:");
+            Embed.WithColor(new Color(236, 183, 4));
+            Embed.WithImageUrl("https://github.com/DrHacknik/OpenBot/blob/master/Splash_256.png?raw=true");
+            Embed.WithDescription("\r\n" +
                 "\r\n**!warn-beta <@user>** : Warns the mentioned user." +
                 "\r\n**!rickroll <@user>** : RickRolls the mentioned user." +
                 "\r\n**!kiss <@user>** : Kisses the mentioned user." +
@@ -34,13 +37,13 @@ namespace OpenBot {
                 "\r\n**!rollrole** : Random Role value." +
                 "\r\n**!userinfo <@user> <image size: One value only, ex 64. If null, then 128 is used>** : Shows the mentioned user's information and avatar image." +
                 "\r\n**!delete-beta <value>** : Deletes the specified amount of previous messages. *Broken right now*");
-            Embed.WithTimestamp (DateTime.Now);
-            await Context.Channel.SendMessageAsync (string.Empty, false, Embed.Build ());
+            Embed.WithTimestamp(DateTime.Now);
+            await Context.Channel.SendMessageAsync(string.Empty, false, Embed.Build());
 
             string Message = "Command **!help** requested by " + Context.User.Username + Environment.NewLine +
                 "in channel <#" + Context.Channel.Id + ">";
 
-            await Helper.LoggingAsync (new LogMessage (LogSeverity.Verbose, "Module", Message));
+            await Helper.LoggingAsync(new LogMessage(LogSeverity.Verbose, "Module", Message));
         }
     }
 }

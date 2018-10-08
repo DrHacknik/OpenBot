@@ -3,6 +3,7 @@ using Discord.WebSocket;
 using System;
 using System.IO;
 using System.Threading.Tasks;
+using System.Collections;
 
 /*
 ==============================================
@@ -68,26 +69,37 @@ namespace OpenBot
 
         private static DiscordSocketClient DiscordClient;
         private CommandHandler CmdHandler;
+        private string ApiKey = Config.ApiKey;
         private static string cd = Config.BotDir;
+        private static IniParser parser = new IniParser(cd + "\\Config\\Config.ini");
 
         public async Task StartAsync()
         {
+            if (!File.Exists(cd + "\\Config\\Config.ini"))
+            {
+                CreateConfig();
+                SaveConfig();
+            }
+            else
+            {
+                await ParseConfig();
+            }
             CreateBotDir();
+
             Console.ForegroundColor = ConsoleColor.Magenta;
             Console.Clear();
             Helper.RunAsync(Helper.LoggingAsync(new LogMessage(LogSeverity.Verbose, "Bot", "========================================================================\r\n\\^.^/ Starting " + Config.BotName + "~\r\nVersion: " + Config.Version + "\r\nPlatform: " + Config.OS + "\r\n========================================================================\r\n")));
             Console.ForegroundColor = ConsoleColor.White;
-            if (!File.Exists(Path.Combine(cd + "\\" + Config.ApiFile)))
+            if (File.ReadAllText(Path.Combine(cd + "\\ApiKey")) == null)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
-                Helper.RunAsync(Helper.LoggingAsync(new LogMessage(LogSeverity.Verbose, "Bot", "Unable to locate Key file.")));
+                Helper.RunAsync(Helper.LoggingAsync(new LogMessage(LogSeverity.Verbose, "Bot", "No API Token is stored within the Config.")));
                 Console.ForegroundColor = ConsoleColor.Red;
                 Helper.RunAsync(Helper.LoggingAsync(new LogMessage(LogSeverity.Verbose, "Bot", "The bot has stopped due to a previous error. \r\nPlease fix the issue and restart the bot.")));
                 Console.ForegroundColor = ConsoleColor.White;
                 await Task.Delay(-1);
                 return;
             }
-            string ApiKey = File.ReadAllText(Path.Combine(cd + "\\" + Config.ApiFile));
 
             DiscordClient = new DiscordSocketClient(new DiscordSocketConfig
             {
@@ -103,7 +115,7 @@ namespace OpenBot
 
                 Helper.RunAsync(Helper.LoggingAsync(new LogMessage(LogSeverity.Verbose, "Bot", "Connecting...")));
 
-                await DiscordClient.LoginAsync(TokenType.Bot, ApiKey);
+                await DiscordClient.LoginAsync(TokenType.Bot, File.ReadAllText(Path.Combine(cd + "\\ApiKey")));
 
                 Helper.RunAsync(Helper.LoggingAsync(new LogMessage(LogSeverity.Verbose, "Bot", "Key file is valid")));
 
@@ -140,23 +152,16 @@ namespace OpenBot
                     "=====================================";
 
                 await Helper.LoggingAsync(new LogMessage(LogSeverity.Verbose, "Bot", Message));
-                if (cd + "\\RyuStatus" == null)
-                {
-                    await DiscordClient.SetGameAsync(Config.GameStatus);
-                }
-                else
-                {
-                    await DiscordClient.SetGameAsync(File.ReadAllText(Path.Combine(cd + "\\OpenStatus")));
-                }
             };
 
+            await SetStatus();
             await Task.Delay(-1);
         }
 
         public static async Task SetStatus()
         {
             await DiscordClient.SetGameAsync(Config.GameStatus);
-            File.WriteAllText(cd + "\\" + Config.StatusFile, Config.GameStatus);
+            SaveConfig();
             return;
         }
 
@@ -179,6 +184,40 @@ namespace OpenBot
                     return;
                 }
             }
+        }
+
+        public static void CreateConfig()
+        {
+            File.Create(cd + "\\Config\\Config.ini");
+            parser.AddSetting("botsettings", "botlewddir");
+            parser.AddSetting("botsettings", "gamestatus");
+            parser.AddSetting("botsettings", "logwithoutstamp");
+            parser.SaveSettings(cd + "\\Config\\Config.ini");
+            return;
+        }
+
+        public static void SaveConfig()
+        {
+            parser.AddSetting("botsettings", "botlewddir", Config.LewdDir);
+            parser.AddSetting("botsettings", "gamestatus", Config.GameStatus);
+            parser.AddSetting("botsettings", "logwithoutstamp", Config.LogWithoutStamp);
+            parser.SaveSettings(cd + "\\Config\\Config.ini");
+            return;
+        }
+
+        public async Task ParseConfig()
+        {
+            try //Parse the config file
+            {
+                Config.LewdDir = parser.GetSetting("botsettings", "botlewddir");
+                Config.GameStatus += parser.GetSetting("botsettings", "gamestatus");
+                Config.LogWithoutStamp += parser.GetSetting("botsettings", "logwithoutstamp");
+                await SetStatus();
+            }
+            catch (Exception ex)
+            {
+            }
+            return;
         }
     }
 }

@@ -36,6 +36,10 @@ namespace OpenBot.Services
                 StreamReader upd_rd = new StreamReader(dataStream);
                 string upd_get = upd_rd.ReadToEnd();
 
+                if (!Directory.Exists(cd + "\\Temp"))
+                {
+                    Directory.CreateDirectory(cd + "\\Temp");
+                }
                 if (File.Exists(cd + "\\Temp\\Update.ini"))
                 {
                     File.Delete(cd + "\\Temp\\Update.ini");
@@ -48,10 +52,6 @@ namespace OpenBot.Services
 
                 //Get and read latest update info, then grab it
                 //But first delete old files, and continue.
-                if (!Directory.Exists(cd + "\\Temp"))
-                {
-                    Directory.CreateDirectory(cd + "\\Temp");
-                }
 
                 IniParser parser = new IniParser(cd + "\\Temp\\Update.ini");
                 Version = parser.GetSetting("update", "version");

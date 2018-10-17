@@ -5,6 +5,7 @@ using System.IO;
 using System.Threading.Tasks;
 using System.Collections;
 using System.Linq;
+using OpenBot.Services;
 
 /*
 ==============================================
@@ -152,6 +153,7 @@ namespace OpenBot
                     "Bot Plaform: " + Config.OS + Environment.NewLine +
                     "=====================================";
 
+                SvcGetupdate.CheckUpdate();
                 await Helper.LoggingAsync(new LogMessage(LogSeverity.Verbose, "Bot", Message));
             };
 

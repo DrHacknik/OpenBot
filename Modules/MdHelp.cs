@@ -10,7 +10,6 @@ namespace OpenBot
         private string cd = System.IO.Directory.GetCurrentDirectory();
         private string time = DateTime.Now.ToString();
 
-        [RequireUserPermission(GuildPermission.ManageMessages)]
         [Command("Help-beta")]
         public async Task SendHelp()
         {
@@ -36,7 +35,8 @@ namespace OpenBot
                 "\r\n**!rollnumber** : Random Int number." +
                 "\r\n**!rollrole** : Random Role value." +
                 "\r\n**!userinfo <@user> <image size: One value only, ex 64. If null, then 128 is used>** : Shows the mentioned user's information and avatar image." +
-                "\r\n**!delete-beta <value>** : Deletes the specified amount of previous messages.");
+                "\r\n**!delete-beta <value>** : Deletes the specified amount of previous messages." + Environment.NewLine +
+                "Dedicated Website: https://dochacknik.keybase.pub/index/openbot");
             Embed.WithTimestamp(DateTime.Now);
             await Context.Channel.SendMessageAsync(string.Empty, false, Embed.Build());
 

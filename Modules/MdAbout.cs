@@ -12,7 +12,6 @@ namespace OpenBot
         private string time = DateTime.Now.ToString();
 
         [Command("About-beta")]
-        [RequireUserPermission(GuildPermission.ManageMessages)]
         public async Task SendAbout()
         {
             EmbedBuilder Embed = new EmbedBuilder();
@@ -26,7 +25,8 @@ namespace OpenBot
                 "**Bot name:** " + Config.BotName + Environment.NewLine +
                 "**Bot revision:** " + Config.BuildDate + Environment.NewLine +
                 "**Bot Type:** DotNet Core | Web-socket-based" + Environment.NewLine +
-                "**Bot Platform:** " + Config.OS + Environment.NewLine);
+                "**Bot Platform:** " + Config.OS + Environment.NewLine +
+                "Dedicated Website: https://dochacknik.keybase.pub/index/openbot");
             Embed.WithTimestamp(DateTime.UtcNow);
             await Context.Channel.SendMessageAsync(String.Empty, false, Embed.Build());
 

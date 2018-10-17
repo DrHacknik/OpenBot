@@ -15,7 +15,7 @@ namespace OpenBot
         public async Task SendAbout()
         {
             EmbedBuilder Embed = new EmbedBuilder();
-            Embed.WithTitle("About Awoo Bot [Beta]:");
+            Embed.WithTitle("About OpenBot [Beta]:");
             Embed.WithColor(new Color(236, 183, 4));
             Embed.WithImageUrl("https://github.com/DrHacknik/OpenBot/blob/master/Splash_256.png?raw=true");
             Embed.WithDescription(

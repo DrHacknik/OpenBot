@@ -31,6 +31,10 @@ namespace OpenBot.Modules {
                 "in channel <#" + Context.Channel.Id + ">";
 
             await Helper.LoggingAsync (new LogMessage (LogSeverity.Verbose, "Module", Message));
+            
+         private void ParseAPI { 
+             
+         }
         }
     }
 }

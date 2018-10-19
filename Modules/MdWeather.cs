@@ -32,9 +32,10 @@ namespace OpenBot.Modules {
 
             await Helper.LoggingAsync (new LogMessage (LogSeverity.Verbose, "Module", Message));
             
-         private void ParseAPI { 
-             
-         }
+        }
+        
+        public class ParseWeather { 
+            
         }
     }
 }

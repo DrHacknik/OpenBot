@@ -5,7 +5,7 @@ using Discord.Commands;
 using Discord.WebSocket;
 
 namespace OpenBot.Modules {
-    public class MdHug : ModuleBase<SocketCommandContext> {
+    public class MdWeather : ModuleBase<SocketCommandContext> {
         private string time = DateTime.Now.ToString ();
         private ulong apikey;
         private string location;

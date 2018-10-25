@@ -3,6 +3,8 @@
 An open sourced Discord bot, based on Discord.NET and NetCore 2.2. 
 <br>This bot is completely written in C#, and is licensed under the GNU GPL v3 License Agreement. 
 
+Invite link is available on the Bot's dedicated web-page: https://dochacknik.keybase.pub/index/openbot
+
 ## Usage: 
 *Command list is available [here](https://dochacknik.keybase.pub/index/openbot/commands)*
 

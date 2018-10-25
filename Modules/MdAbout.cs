@@ -11,13 +11,13 @@ namespace OpenBot
 
         private string time = DateTime.Now.ToString();
 
-        [Command("About-beta")]
+        [Command("About-canary")]
         public async Task SendAbout()
         {
             EmbedBuilder Embed = new EmbedBuilder();
-            Embed.WithTitle("About OpenBot [Beta]:");
+            Embed.WithTitle("About OpenBot [Canary]:");
             Embed.WithColor(new Color(236, 183, 4));
-            Embed.WithImageUrl("https://github.com/DrHacknik/OpenBot/blob/master/Splash_256.png?raw=true");
+            Embed.WithImageUrl("https://github.com/DrHacknik/OpenBot/blob/canary/Splash_canary_256.png?raw=true");
             Embed.WithDescription(
                 "**" + Config.BotName + "** for Discord" + Environment.NewLine +
                 "**by Dr.Hacknik**" + Environment.NewLine +

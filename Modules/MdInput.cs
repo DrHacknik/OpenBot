@@ -8,7 +8,7 @@ namespace OpenBot.Modules {
         private string cd = System.IO.Directory.GetCurrentDirectory ();
         private string time = DateTime.Now.ToString ();
 
-        [Command ("input-beta")]
+        [Command ("input-canary")]
         [RequireUserPermission (GuildPermission.ManageMessages)]
         public async Task DoThatInput ([Remainder] string IMessage) {
             await Context.Message.DeleteAsync ();

@@ -6,7 +6,7 @@ using Discord.WebSocket;
 
 namespace OpenBot.Modules {
     public class MdWarn : ModuleBase<SocketCommandContext> {
-        [Command ("Warn-beta")]
+        [Command ("Warn-canary")]
         [RequireUserPermission (GuildPermission.ManageMessages)]
         public async Task Warn (SocketGuildUser WarnedUser, [Remainder] string WarningReason) {
             string CurrentTime = DateTime.Now.ToString ();

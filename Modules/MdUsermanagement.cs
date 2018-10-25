@@ -7,7 +7,7 @@ namespace OpenBot.Modules {
     public class UserManagement : ModuleBase<SocketCommandContext> {
         private string time = DateTime.Now.ToString ();
 
-        [Command ("Kick-beta")]
+        [Command ("Kick-canary")]
         [RequireBotPermission (GuildPermission.KickMembers)]
         [RequireUserPermission (GuildPermission.KickMembers)]
         public async Task KickUser (IGuildUser user, [Remainder] string reason) {
@@ -19,7 +19,7 @@ namespace OpenBot.Modules {
             await Helper.LoggingAsync (new LogMessage (LogSeverity.Verbose, "Module", Message));
         }
 
-        [Command ("Ban-beta")]
+        [Command ("Ban-canary")]
         [RequireBotPermission (GuildPermission.BanMembers)]
         [RequireUserPermission (GuildPermission.BanMembers)]
         public async Task BanUser (IGuildUser user, [Remainder] string reason) {
@@ -30,7 +30,7 @@ namespace OpenBot.Modules {
             await Helper.LoggingAsync (new LogMessage (LogSeverity.Verbose, "Module", Message));
         }
 
-        [Command ("Mute-beta")]
+        [Command ("Mute-canary")]
         [RequireUserPermission (GuildPermission.ManageMessages)]
         [RequireBotPermission (GuildPermission.MuteMembers)]
         public async Task MuteUser (IGuildUser user, [Remainder] string reason) {

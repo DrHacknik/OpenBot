@@ -63,74 +63,93 @@ run daily and continue to run.
 ==============================================
  */
 
-namespace OpenBot {
-    public class Program {
-        private static void Main (string[] args) => new Program ().StartAsync ().GetAwaiter ().GetResult ();
+namespace OpenBot
+{
+    public class Program
+    {
+        private static void Main(string[] args) => new Program().StartAsync().GetAwaiter().GetResult();
 
         private static DiscordSocketClient DiscordClient;
         private CommandHandler CmdHandler;
         private string ApiKey = Config.ApiKey;
         private static string cd = Config.BotDir;
-        private static IniParser parser = new IniParser (cd + "\\Config\\Config.ini");
 
-        public async Task StartAsync () {
-            if (!File.Exists (cd + "\\Config\\Config.ini")) {
-                CreateBotDir ();
-                CreateConfig ();
-                SaveConfig ();
-            } else {
-                await ParseConfig ();
+        public async Task StartAsync()
+        {
+            if (Config.Branch == "Canary")
+            {
+                Config.BotDir = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\OpenBot\\Canary";
+            }
+            else if (Config.BotDir == "Master")
+            {
+                Config.BotDir = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\OpenBot";
+            }
+            if (!File.Exists(cd + "\\Config\\Config.ini"))
+            {
+                CreateBotDir();
+                CreateConfig();
+                SaveConfig();
+            }
+            else
+            {
+                await ParseConfig();
             }
 
             Console.ForegroundColor = ConsoleColor.Magenta;
-            Console.Clear ();
-            Helper.RunAsync (Helper.LoggingAsync (new LogMessage (LogSeverity.Verbose, "Bot", "========================================================================\r\n\\^.^/ Starting " + Config.BotName + "~\r\nVersion: " + Config.Version + "\r\nPlatform: " + Config.OS + "\r\n========================================================================\r\n")));
+            Console.Clear();
+            Helper.RunAsync(Helper.LoggingAsync(new LogMessage(LogSeverity.Verbose, "Bot", "========================================================================\r\n\\^.^/ Starting " + Config.BotName + "~\r\nVersion: " + Config.Version + "\r\nPlatform: " + Config.OS + "\r\n========================================================================\r\n")));
             Console.ForegroundColor = ConsoleColor.White;
-            if (File.ReadAllText (Path.Combine (cd + "\\ApiKey")) == null) {
+            if (File.ReadAllText(Path.Combine(cd + "\\ApiKey")) == null)
+            {
                 Console.ForegroundColor = ConsoleColor.Red;
-                Helper.RunAsync (Helper.LoggingAsync (new LogMessage (LogSeverity.Verbose, "Bot", "No API Token is stored within the Config.")));
+                Helper.RunAsync(Helper.LoggingAsync(new LogMessage(LogSeverity.Verbose, "Bot", "No API Token is stored within the Config.")));
                 Console.ForegroundColor = ConsoleColor.Red;
-                Helper.RunAsync (Helper.LoggingAsync (new LogMessage (LogSeverity.Verbose, "Bot", "The bot has stopped due to a previous error. \r\nPlease fix the issue and restart the bot.")));
+                Helper.RunAsync(Helper.LoggingAsync(new LogMessage(LogSeverity.Verbose, "Bot", "The bot has stopped due to a previous error. \r\nPlease fix the issue and restart the bot.")));
                 Console.ForegroundColor = ConsoleColor.White;
-                await Task.Delay (-1);
+                await Task.Delay(-1);
                 return;
             }
 
-            DiscordClient = new DiscordSocketClient (new DiscordSocketConfig {
+            DiscordClient = new DiscordSocketClient(new DiscordSocketConfig
+            {
                 LogLevel = LogSeverity.Verbose
             });
 
             Helper._DiscordClient = DiscordClient;
             DiscordClient.Log += Helper.LoggingAsync;
 
-            try {
-                Helper.RunAsync (Helper.LoggingAsync (new LogMessage (LogSeverity.Verbose, "Bot", "Reading Key file...")));
+            try
+            {
+                Helper.RunAsync(Helper.LoggingAsync(new LogMessage(LogSeverity.Verbose, "Bot", "Reading Key file...")));
 
-                Helper.RunAsync (Helper.LoggingAsync (new LogMessage (LogSeverity.Verbose, "Bot", "Connecting...")));
+                Helper.RunAsync(Helper.LoggingAsync(new LogMessage(LogSeverity.Verbose, "Bot", "Connecting...")));
 
-                await DiscordClient.LoginAsync (TokenType.Bot, File.ReadAllText (Path.Combine (cd + "\\ApiKey")));
+                await DiscordClient.LoginAsync(TokenType.Bot, File.ReadAllText(Path.Combine(cd + "\\ApiKey")));
 
-                Helper.RunAsync (Helper.LoggingAsync (new LogMessage (LogSeverity.Verbose, "Bot", "Key file is valid")));
+                Helper.RunAsync(Helper.LoggingAsync(new LogMessage(LogSeverity.Verbose, "Bot", "Key file is valid")));
 
-                await DiscordClient.StartAsync ();
+                await DiscordClient.StartAsync();
 
-                CmdHandler = new CommandHandler (DiscordClient);
-            } catch (Exception Ex) {
+                CmdHandler = new CommandHandler(DiscordClient);
+            }
+            catch (Exception Ex)
+            {
                 Console.ForegroundColor = ConsoleColor.Red;
                 string ExMessage = "ERROR: Key file is invalid! Or an Internet connection is unavailable." + Environment.NewLine +
                     "ERROR: There was an internal bot error." + Environment.NewLine +
                     Ex;
 
-                Helper.RunAsync (Helper.LoggingAsync (new LogMessage (LogSeverity.Verbose, "Bot", ExMessage)));
+                Helper.RunAsync(Helper.LoggingAsync(new LogMessage(LogSeverity.Verbose, "Bot", ExMessage)));
                 Console.ForegroundColor = ConsoleColor.Red;
-                Helper.RunAsync (Helper.LoggingAsync (new LogMessage (LogSeverity.Verbose, "Bot", "The bot has stopped due to a previous error. \r\nPlease fix the issue and restart the bot.")));
+                Helper.RunAsync(Helper.LoggingAsync(new LogMessage(LogSeverity.Verbose, "Bot", "The bot has stopped due to a previous error. \r\nPlease fix the issue and restart the bot.")));
                 Console.ForegroundColor = ConsoleColor.White;
-                await Task.Delay (-1);
+                await Task.Delay(-1);
                 Console.ForegroundColor = ConsoleColor.White;
                 return;
             }
 
-            DiscordClient.Ready += async () => {
+            DiscordClient.Ready += async () =>
+            {
                 string Message = "=====================================" + Environment.NewLine +
                     Config.BotName + " for Discord" + Environment.NewLine +
                     "by Dr.Hacknik" + Environment.NewLine +
@@ -141,68 +160,87 @@ namespace OpenBot {
                     "Bot Plaform: " + Config.OS + Environment.NewLine +
                     "=====================================";
 
-                SvcGetupdate.CheckUpdate ();
-                await Helper.LoggingAsync (new LogMessage (LogSeverity.Verbose, "Bot", Message));
+                SvcGetupdate.CheckUpdate();
+                await Helper.LoggingAsync(new LogMessage(LogSeverity.Verbose, "Bot", Message));
             };
 
-            await SetStatus ();
-            await Task.Delay (-1);
+            await SetStatus();
+            await Task.Delay(-1);
         }
 
-        public static async Task SetStatus () {
-            while (true) {
-                int Count = DiscordClient.Guilds.Count ();
-                string SCount = Count.ToString ();
-                await DiscordClient.SetGameAsync ("on " + SCount + " Guilds.");
-                await Task.Delay (-1);
+        public static async Task SetStatus()
+        {
+            while (true)
+            {
+                int Count = DiscordClient.Guilds.Count();
+                string SCount = Count.ToString();
+                await DiscordClient.SetGameAsync("on " + SCount + " Guilds.");
+                await Task.Delay(-1);
             }
         }
 
-        public static void CreateBotDir () {
-            if (!Directory.Exists (cd)) {
-                try {
-                    Directory.CreateDirectory (cd);
+        public static void CreateBotDir()
+        {
+            if (!Directory.Exists(cd))
+            {
+                try
+                {
+                    Directory.CreateDirectory(cd);
                     return;
-                } catch (Exception ex) {
+                }
+                catch (Exception ex)
+                {
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Helper.RunAsync (Helper.LoggingAsync (new LogMessage (LogSeverity.Verbose, "Bot", "Unable to create Bot Directory")));
+                    Helper.RunAsync(Helper.LoggingAsync(new LogMessage(LogSeverity.Verbose, "Bot", "Unable to create Bot Directory")));
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Helper.RunAsync (Helper.LoggingAsync (new LogMessage (LogSeverity.Verbose, "Bot", "The bot has stopped due to a previous error. \r\nPlease fix the issue and restart the bot.")));
+                    Helper.RunAsync(Helper.LoggingAsync(new LogMessage(LogSeverity.Verbose, "Bot", "The bot has stopped due to a previous error. \r\nPlease fix the issue and restart the bot.")));
                     Console.ForegroundColor = ConsoleColor.White;
                     return;
                 }
             }
         }
 
-        public static void CreateConfig () {
-            File.Create (cd + "\\Config\\Config.ini");
-            parser.AddSetting ("botsettings", "botlewddir");
-            parser.AddSetting ("botsettings", "logwithoutstamp");
-            parser.SaveSettings (cd + "\\Config\\Config.ini");
+        public static void CreateConfig()
+        {
+            Directory.CreateDirectory(cd + "\\Config");
+            File.Create(cd + "\\Config\\Config.ini");
+            IniParser parser = new IniParser(cd + "\\Config\\Config.ini");
+            parser.AddSetting("botsettings", "botlewddir");
+            parser.AddSetting("botsettings", "logwithoutstamp");
+            parser.AddSetting("botsettings", "branch", "canary");
+            parser.SaveSettings(cd + "\\Config\\Config.ini");
             return;
         }
 
-        public static void SaveConfig () {
-            parser.AddSetting ("botsettings", "botlewddir", Config.LewdDir);
-            parser.AddSetting ("botsettings", "logwithoutstamp", Config.LogWithoutStamp);
-            parser.SaveSettings (cd + "\\Config\\Config.ini");
+        public static void SaveConfig()
+        {
+            IniParser parser = new IniParser(cd + "\\Config\\Config.ini");
+            parser.AddSetting("botsettings", "botlewddir", Config.LewdDir);
+            parser.AddSetting("botsettings", "logwithoutstamp", Config.LogWithoutStamp);
+            parser.SaveSettings(cd + "\\Config\\Config.ini");
             return;
         }
 
-        public async Task ParseConfig () {
+        public async Task ParseConfig()
+        {
+            IniParser parser = new IniParser(cd + "\\Config\\Config.ini");
             try //Parse the config file
             {
-                Config.LewdDir = parser.GetSetting ("botsettings", "botlewddir");
-                Config.LogWithoutStamp += parser.GetSetting ("botsettings", "logwithoutstamp");
-                if (parser.GetSetting ("botsettings", "canary") == "true") {
-                    Config.BotDir = Environment.GetFolderPath (Environment.SpecialFolder.ApplicationData) + "\\OpenBot\\Canary";
+                Config.LewdDir = parser.GetSetting("botsettings", "botlewddir");
+                Config.LogWithoutStamp += parser.GetSetting("botsettings", "logwithoutstamp");
+                if (parser.GetSetting("botsettings", "canary") == "true")
+                {
+                    Config.BotDir = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\OpenBot\\Canary";
                     Config.Branch = "Canary";
-                } else {
-                    Config.BotDir = Environment.GetFolderPath (Environment.SpecialFolder.ApplicationData) + "\\OpenBot";
+                }
+                else
+                {
+                    Config.BotDir = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\OpenBot";
                     Config.Branch = "Master";
                 }
-                await SetStatus ();
-            } catch (Exception ex) { }
+                await SetStatus();
+            }
+            catch (Exception ex) { }
             return;
         }
     }

@@ -8,7 +8,7 @@ namespace OpenBot.Modules
 {
     public class MdDeleteMessages : ModuleBase<SocketCommandContext>
     {
-        [Command("Delete-beta")]
+        [Command("Delete-canary")]
         [RequireUserPermission(GuildPermission.ManageMessages)]
         public async Task DeleteMessages(int Number, [Remainder] string Reason = null)
         {

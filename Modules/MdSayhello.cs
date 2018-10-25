@@ -7,7 +7,7 @@ namespace OpenBot.Modules {
     public class MdSayhello : ModuleBase<SocketCommandContext> {
         private string time = DateTime.Now.ToString ();
 
-        [Command ("SayHello-beta")]
+        [Command ("SayHello-canary")]
         public async Task Say_Hello () {
             await Context.Message.DeleteAsync ();
             await Context.Channel.SendMessageAsync ("**I did not do it, I did not hit her; I did nawt!**");

@@ -1,27 +1,12 @@
 ![Logo](Logo_Canary_128.png)
-# OpenBot [Discord Bot]
+# OpenBot [Discord Bot] - Canary Branch
 An open sourced Discord bot, based on Discord.NET and NetCore 2.2. 
 <br>This bot is completely written in C#, and is licensed under the GNU GPL v3 License Agreement. 
 
-## Usage: 
+**Note:** Please do remember, that this is the canary branch. All new changes are within this branch; and changes that are ironed out will eventually get merged to master. The OpenBot [canary] bot is also a seperate bot completely; and can be invited. A Invite link is available on the Bot's dedicated web-page: https://dochacknik.keybase.pub/index/openbot
 
-```!warn-beta <@user> : Warns the mentioned user. 
-!rickroll <@user> : RickRolls the mentioned user. 
-!kiss <@user> : Kisses the mentioned user. 
-!hug <@user> : Hugs the mentioned user. 
-!rikka <@user> : Tells the mentioned user; get Rikka'd. 
-!lewd: Sends a good ol' lewd to the same channel. Must be marked as NSFW. 
-!kick-beta <@user> : Kicks the mentioned user. 
-!ban-beta <@user> : Bans the mention user.Admins only. 
-!about-beta : Shows the latest bot information. 
-!input-beta <value> : Sends the remainder of the command message as its own message. 
-!sayhello-beta : Say hello. 
-!howareyou <@user> : Say how are you ? 
-!rollnumber : Random Int number. 
-!rollrole : Random Role value. 
-!userinfo <@user> <image size: One value only, ex 64. If null, then 128 is used> : Shows the mentioned user's information and avatar image. 
-!delete-beta <value> : Deletes the specified amount of previous messages. Broken right now
-``` 
+## Usage: 
+*Command list is available ![here](https://dochacknik.keybase.pub/index/openbot)*
 ## API Details: 
 * Discord .NET C#: Version 2.0-beta
 * DotNet Core 2.2-preview 

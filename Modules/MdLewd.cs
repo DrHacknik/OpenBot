@@ -15,7 +15,7 @@ namespace OpenBot.Modules
 {
     public class MdLewd : ModuleBase<SocketCommandContext>
     {
-        [Command("lewd")]
+        [Command("lewd-canary")]
         public async Task Lewdie()
         {
             await Context.Message.DeleteAsync();

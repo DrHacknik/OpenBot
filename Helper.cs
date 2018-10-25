@@ -21,24 +21,7 @@ namespace OpenBot
 
             Console.WriteLine(CurrentTime + " > " + Environment.NewLine + LogMsg.Message);
 
-            //if (Config.LogWithoutStamp == false)
-            //{
-            //    SvcLog.Logged += "\r\n" + CurrentTime + " > " + Environment.NewLine + LogMsg.Message;
-            //}
-            //else if (Config.LogWithoutStamp == true)
-            //{
-            //    SvcLog.Logged += "\r\n" + Environment.NewLine + LogMsg.Message;
-            //}
-            //else if (Config.LogWithoutStamp == null)
-            //{
-            //    Console.WriteLine("\r\nValue cannot be null.");
-            //    return;
-            //}
-            //else
-            //{
-            //    Console.WriteLine("\r\nValue is invalid, but not null.");
-            //    return;
-            //}
+            SvcLog.Logged += Environment.NewLine + LogMsg.Message;
 
             SvcLog.DumpLog();
             string[] HTTPMethods = { "DELETE", "GET", "PATCH", "POST", "PUT" };

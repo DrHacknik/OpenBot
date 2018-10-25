@@ -228,16 +228,16 @@ namespace OpenBot
             {
                 Config.LewdDir = parser.GetSetting("botsettings", "botlewddir");
                 Config.LogWithoutStamp += parser.GetSetting("botsettings", "logwithoutstamp");
-                if (parser.GetSetting("botsettings", "canary") == "true")
-                {
-                    Config.BotDir = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\OpenBot\\Canary";
-                    Config.Branch = "Canary";
-                }
-                else
-                {
-                    Config.BotDir = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\OpenBot";
-                    Config.Branch = "Master";
-                }
+                // if (parser.GetSetting("botsettings", "branch") == "Canary")
+                // {
+                //     Config.BotDir = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\OpenBot\\Canary";
+                //     Config.Branch = "Canary";
+                // }
+                // else
+                // {
+                //     Config.BotDir = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\OpenBot";
+                //     Config.Branch = "Master";
+                // }
                 await SetStatus();
             }
             catch (Exception ex) { }

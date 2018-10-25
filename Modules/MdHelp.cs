@@ -25,7 +25,7 @@ namespace OpenBot
                 "\r\n**!kiss <@user>** : Kisses the mentioned user." +
                 "\r\n**!hug <@user>** : Hugs the mentioned user." +
                 "\r\n**!rikka <@user>** : Tells the mentioned user; get Rikka'd." +
-                "\r\n**!lewd:** Sends a good ol' lewd to the same channel. Must be marked as NSFW." +
+                "\r\n**!lewd-canary:** Sends a good ol' lewd to the same channel. Must be marked as NSFW." +
                 "\r\n**!kick-canary <@user>** : Kicks the mentioned user." +
                 "\r\n**!ban-canary <@user>** : Bans the mention user.Admins only." +
                 "\r\n**!about-canary** : Shows the latest bot information." +

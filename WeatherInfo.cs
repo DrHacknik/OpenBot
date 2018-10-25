@@ -6,7 +6,7 @@ namespace OpenBot
 {
     public static class WeatherInfo
     {
-        public static ulong apikey;
+        public static string apikey = "7d5799d7014a03b4598a0ca40f76a255";
         public static string city;
         public static string county;
         public static string country;

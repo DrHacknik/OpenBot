@@ -11,7 +11,7 @@ namespace OpenBot
         private string cd = System.IO.Directory.GetCurrentDirectory();
         private string time = DateTime.Now.ToString();
 
-        [Command("Userinfo")]
+        [Command("Userinfo-canary")]
         public async Task SendImage(SocketGuildUser MentionedUser, ushort AvatarSize = 128)
         {
             try

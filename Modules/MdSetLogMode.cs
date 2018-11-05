@@ -10,7 +10,7 @@ namespace OpenBot {
 
         private string time = DateTime.Now.ToString ();
 
-        [Command ("SetLogMode")]
+        [Command ("SetLogMode-canary")]
         [RequireUserPermission (GuildPermission.ManageMessages)]
         public async Task SetMode ([Remainder] bool IMode) {
             //Not implemented

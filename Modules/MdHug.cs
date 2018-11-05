@@ -9,7 +9,7 @@ namespace OpenBot.Modules {
         private string time = DateTime.Now.ToString ();
         private string[] Hugs;
 
-        [Command ("hug")]
+        [Command ("hug-canary")]
         public async Task Kissed (SocketGuildUser MentionedUser) {
             Random rand;
 

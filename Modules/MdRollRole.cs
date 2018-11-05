@@ -8,7 +8,7 @@ namespace OpenBot.Modules {
         private string time = DateTime.Now.ToString ();
         private string[] Roles;
 
-        [Command ("rollrole")]
+        [Command ("rollrole-canary")]
         public async Task RollRole () {
             Random rand;
 

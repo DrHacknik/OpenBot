@@ -8,7 +8,7 @@ namespace OpenBot.Modules {
     public class MdStubbed : ModuleBase<SocketCommandContext> {
         private string time = DateTime.Now.ToString ();
 
-        [Command ("stub-specific")]
+        [Command ("stub-specific-canary")]
         public async Task StubSpecific (SocketGuildUser MentionedUser, [Remainder] string Stub) {
             await Context.Message.DeleteAsync ();
 
@@ -25,7 +25,7 @@ namespace OpenBot.Modules {
             await Helper.LoggingAsync (new LogMessage (LogSeverity.Verbose, "Module", Message));
         }
 
-        [Command ("stub")]
+        [Command ("stub-canary")]
         public async Task Stub (SocketGuildUser MentionedUser) {
             await Context.Message.DeleteAsync ();
             await Context.Channel.SendMessageAsync ("User " + MentionedUser.Mention + " has been stubbed.", false);

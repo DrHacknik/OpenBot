@@ -12,7 +12,7 @@ namespace OpenBot
 
         private string time = DateTime.Now.ToString();
 
-        [Command("SetLewdDir")]
+        [Command("SetLewdDir-canary")]
         [RequireUserPermission(GuildPermission.ManageMessages)]
         public async Task SetDir([Remainder] string IDir)
         {

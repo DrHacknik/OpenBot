@@ -9,7 +9,7 @@ namespace OpenBot.Modules {
         private string time = DateTime.Now.ToString ();
         private string[] Insults;
 
-        [Command ("insult")]
+        [Command ("insult-canary")]
         public async Task SendInsult (SocketGuildUser MentionedUser) {
             Random rand;
 

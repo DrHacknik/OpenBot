@@ -8,7 +8,7 @@ namespace OpenBot.Modules {
     public class rick : ModuleBase<SocketCommandContext> {
         private string time = DateTime.Now.ToString ();
 
-        [Command ("RickRoll")]
+        [Command ("RickRoll-canary")]
         [RequireUserPermission (GuildPermission.ManageMessages)]
         public async Task rck (SocketGuildUser user) {
             await Context.Message.DeleteAsync ();

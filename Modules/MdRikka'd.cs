@@ -8,7 +8,7 @@ namespace OpenBot.Modules {
     public class MdRikkad : ModuleBase<SocketCommandContext> {
         private string time = DateTime.Now.ToString ();
 
-        [Command ("rikka")]
+        [Command ("rikka-canary")]
         public async Task GetRikkad (SocketGuildUser MentionedUser) {
             await Context.Message.DeleteAsync ();
 

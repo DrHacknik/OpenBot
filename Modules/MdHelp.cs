@@ -21,21 +21,22 @@ namespace OpenBot
             Embed.WithImageUrl("https://github.com/DrHacknik/OpenBot/blob/master/Splash_canary_256.png?raw=true");
             Embed.WithDescription("\r\n" +
                 "\r\n**!warn-canary <@user>** : Warns the mentioned user." +
-                "\r\n**!rickroll <@user>** : RickRolls the mentioned user." +
-                "\r\n**!kiss <@user>** : Kisses the mentioned user." +
-                "\r\n**!hug <@user>** : Hugs the mentioned user." +
-                "\r\n**!rikka <@user>** : Tells the mentioned user; get Rikka'd." +
+                "\r\n**!rickroll-canary <@user>** : RickRolls the mentioned user." +
+                "\r\n**!kiss-canary <@user>** : Kisses the mentioned user." +
+                "\r\n**!hug-canary <@user>** : Hugs the mentioned user." +
+                "\r\n**!rikka-canary <@user>** : Tells the mentioned user; get Rikka'd." +
                 "\r\n**!lewd-canary:** Sends a good ol' lewd to the same channel. Must be marked as NSFW." +
                 "\r\n**!kick-canary <@user>** : Kicks the mentioned user." +
                 "\r\n**!ban-canary <@user>** : Bans the mention user.Admins only." +
                 "\r\n**!about-canary** : Shows the latest bot information." +
                 "\r\n**!input-canary <value>** : Sends the remainder of the command message as its own message." +
                 "\r\n**!sayhello-canary** : Say hello." +
-                "\r\n**!howareyou <@user>** : Say how are you ?" +
-                "\r\n**!rollnumber** : Random Int number." +
-                "\r\n**!rollrole** : Random Role value." +
-                "\r\n**!userinfo <@user> <image size: One value only, ex 64. If null, then 128 is used>** : Shows the mentioned user's information and avatar image." +
-                "\r\n**!delete-canary <value>** : Deletes the specified amount of previous messages." + Environment.NewLine +
+                "\r\n**!howareyou-canary <@user>** : Say how are you ?" +
+                "\r\n**!rollnumber-canary** : Random Int number." +
+                "\r\n**!rollrole-canary** : Random Role value." +
+                "\r\n**!userinfo-canary <@user> <image size: One value only, ex 64. If null, then 128 is used>** : Shows the mentioned user's information and avatar image." +
+                "\r\n**!delete-canary <value>** : Deletes the specified amount of previous messages." + 
+                "\r\n**!tp <value>** : Teleports the user to a specified location." +
                 "Dedicated Website: https://dochacknik.keybase.pub/index/openbot");
             Embed.WithTimestamp(DateTime.Now);
             await Context.Channel.SendMessageAsync(string.Empty, false, Embed.Build());

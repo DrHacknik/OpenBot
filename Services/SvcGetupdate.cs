@@ -27,27 +27,27 @@ namespace OpenBot.Services {
                 Console.ForegroundColor = ConsoleColor.White;
 
                 //Read latest update and convert to string
-                WebRequest request = WebRequest.Create ("https://github.com/DrHacknik/OpenBot/raw/master/Updates/Update.ini");
-                WebResponse response = request.GetResponse ();
-                Stream dataStream = response.GetResponseStream ();
-                StreamReader upd_rd = new StreamReader (dataStream);
-                string upd_get = upd_rd.ReadToEnd ();
+                WebRequest UpdateRequest = WebRequest.Create ("https://github.com/DrHacknik/OpenBot/raw/master/Updates/Update.ini");
+                WebResponse UpdateResponse = UpdateRequest.GetResponse ();
+                Stream UpdateStream = UpdateResponse.GetResponseStream ();
+                StreamReader UpdateRead = new StreamReader (UpdateStream);
+                string UpdateGet = UpdateRead.ReadToEnd ();
 
                 if (!Directory.Exists (cd + "\\Temp")) {
                     Directory.CreateDirectory (cd + "\\Temp");
                 }
                 if (File.Exists (cd + "\\Temp\\Update.ini")) {
                     File.Delete (cd + "\\Temp\\Update.ini");
-                    File.WriteAllText (cd + "\\Temp\\Update.ini", upd_get);
+                    File.WriteAllText (cd + "\\Temp\\Update.ini", UpdateGet);
                 } else {
-                    File.WriteAllText (cd + "\\Temp\\Update.ini", upd_get);
+                    File.WriteAllText (cd + "\\Temp\\Update.ini", UpdateGet);
                 }
 
-                WebRequest request1 = WebRequest.Create ("https://github.com/DrHacknik/OpenBot/raw/master/Data/Images/Icons/Database.ini");
-                WebResponse response1 = request1.GetResponse ();
-                Stream dataStream1 = response1.GetResponseStream ();
-                StreamReader DataRead = new StreamReader (dataStream);
-                string DataGet = DataRead.ReadToEnd ();
+                WebRequest GetDatabaseReq = WebRequest.Create ("https://github.com/DrHacknik/OpenBot/raw/master/Data/Images/Icons/Database.ini");
+                WebResponse GetDatabaseResp = GetDatabaseReq.GetResponse ();
+                Stream DatabaseStream = GetDatabaseResp.GetResponseStream ();
+                StreamReader DatabaseRead = new StreamReader (DatabaseStream);
+                string DataGet = DatabaseRead.ReadToEnd ();
 
                 if (!Directory.Exists (cd + "\\Temp")) {
                     Directory.CreateDirectory (cd + "\\Temp");
@@ -58,8 +58,8 @@ namespace OpenBot.Services {
                 } else {
                     File.WriteAllText (cd + "\\Temp\\Database.ini", DataGet);
                 }
-                IniParser parser1 = new IniParser (cd + "\\Temp\\Database.ini");
-                WeatherInfo.icon = parser1.GetSetting ("normal_conditions", "clearnight");
+                IniParser DatabaseParser = new IniParser (cd + "\\Temp\\Database.ini");
+                //WeatherInfo.icon = DatabaseParser.GetSetting ("normal_conditions", "clearnight");
 
                 //Get and read latest update info, then grab it
                 //But first delete old files, and continue.
